@@ -1,0 +1,22 @@
+{% extends  'index.html'%}
+
+
+{% block content %}  
+
+
+
+    <div style=" margin-top:20px;margin-bottom:20px;">
+        <div>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn btn-outline-dark">Search</button>
+        </form>
+    </div>
+
+    
+
+</div>
+
+
+{% endblock %}

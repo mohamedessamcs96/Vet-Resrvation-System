@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+
+<!Doctype html>
+<html>
+    <head></head>
+    <body>
+        {% block content %}        
+            <h1>تسجيل الدخول</h1>
+            <form  style="text-align: right;" method="POST">
+                {% csrf_token %}
+                <label style="text-align: right;"> البريد الالكتروني</label>
+                {{login_form.username}}
+                <label style="text-align: right;"> الرقم السري</label>
+                {{login_form.password  }}
+                <br>
+                <div style="text-align: center;">
+                <button  class="btn btn-outline-dark" type="submit">تسجيل الدخول</button>
+                <p><a href="{% url 'password_reset' %}">هل نسيت الرقم السري؟</a></p>
+            </div>
+            </form>
+            <hr>
+            
+
+        {% endblock %}
+    </body>
+</html>
+
+

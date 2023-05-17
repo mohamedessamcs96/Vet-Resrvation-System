@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% load static %}
+<!Doctype html>
+<html>
+    <head></head>
+    <body>
+        {%block content%}
+        <h1  class="display-4" style=" text-align: center;">الصفحه الرئيسيه</h1>
+        <div style=" margin-left: 25%; margin-top:20px;margin-bottom:20px;">
+            <div class="container">
+                <div class="image-container">
+                   
+                    <a href="/search_user/">
+                        <div class="circle-image">
+                        <img src="{% static 'img/hourse1.jpg' %}" alt="Description of the image">
+                            
+                    </div>
+                    </a>
+                    
+                </div>
+                
+                    <a href="/add_user/">
+                        <div class="circle-image"> 
+                        <img src="{% static 'img/hourses2.jpg' %}" alt="Description of the image">
+                        </div>
+                    </a>
+                </div>
+                
+        </div>
+
+    </div>
+        {% endblock %}
+    </body>
+</html>

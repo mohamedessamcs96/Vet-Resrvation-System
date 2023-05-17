@@ -1,0 +1,46 @@
+{% extends  'index.html'%}
+
+
+{% block content %}  
+
+<div class="container">
+    
+    <div  style="  text-align: right;  margin-top:3vw; margin-left : 2vw;">
+        
+  
+        <div class="row">
+            <div class="form-group col-md-12">  
+                
+                <h1>بيانات العميل </h1>
+                <br>
+                <p><strong>اسم العميل:</strong>{{user.clientname}}</p>
+                <p><strong>رقم الجوال:</strong>{{user.phonenumber}}</p>
+   
+  
+                <p><strong>نوع الحيوان:</strong>{{user.animaltype}}</p>
+
+   
+
+                <p><strong>نوع العينه:</strong>{{user.sampletype}}</p>
+
+                <p><strong>عمر الحيوان:</strong>{{user.age}}</p>
+
+                <p><strong>ملحوظات</strong>{{user.notes}}</p>
+                <div style=" text-align: center;">
+                <a href="{% url 'createreport'  user.clientnumber %}">Create PDF report </a>
+                </div>
+            </div>
+
+        </div>
+        
+   
+        
+   
+      
+    </div>
+    </div>
+    
+
+
+{% endblock %}
+
