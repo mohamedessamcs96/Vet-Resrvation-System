@@ -1,0 +1,76 @@
+{% extends  'index.html'%}
+
+
+{% block content %} 
+
+<h1 style=" text-align: center;">Hametology امراض الدم</h1>
+
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100vh;
+    margin-top:3vw;
+    text-align: right;
+  ">
+<form style=" margin-left: 5%; margin-top:3vw; " method="POST">
+        {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-4">  
+                WBC مناعه{{ form.WBC }}
+            </div>
+            <div class="form-group col-md-4">  
+                LYMPH خلايا لينفاويه{{ form.LYMPH }}
+            </div>
+            <div class="form-group col-md-4">  
+                MONO خلايا وحيده النواه{{ form.MONO }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">  
+            HCTالدم{{ form.HCT }}
+            </div>
+            <div class="form-group col-md-4">  
+            MCVمعدل حجم كريات الدم{{ form.MCV }}
+            </div>
+            <div class="form-group col-md-4">  
+                MCHهموجلوبين الكريه الوسط{{ form.MCH }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">  
+                MCHCمتوسط تركيز الهموجلوبين{{ form.MCHC }}
+            </div>
+            <div class="form-group col-md-4">  
+                PLTالصفائح الدمويه{{ form.PLT }}
+            </div>
+            <div class="form-group col-md-4">  
+                HGBهموجلوبين{{ form.HGB }}
+            </div>
+         </div>
+        <di class="row">
+            <div class="form-group col-md-4">  
+                EOSINالخلايا الحامضيه{{form.EOSIN }}
+            </div>
+            <div class="form-group col-md-4">  
+                NEUTالخلايا المتعادله{{ form.NEUT }}
+            </div>
+            <div class="form-group col-md-4">  
+                RBCكريات الدم الحمراء{{ form.RBC }}
+            </div>
+        </div>
+        <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
+            <button  class="btn btn-outline-dark" type="submit">Submit</button>
+        </div>    
+    </form>
+    </div>
+</div>
+
+    
+
+
+
+
+{% endblock %}

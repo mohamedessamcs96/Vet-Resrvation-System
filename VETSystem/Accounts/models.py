@@ -53,6 +53,7 @@ class Client(models.Model):
         return str(self.clientnumber)
 
 
+
 class Report(models.Model):
     title=models.CharField(max_length=20)
     notes=models.CharField(max_length=100)
@@ -63,3 +64,84 @@ class Report(models.Model):
         return self.title
     
 
+
+
+class Haematology(models.Model):
+    admin=models.ForeignKey(UserAdmin,on_delete=models.CASCADE,null=True)
+    client=models.ForeignKey(Client,on_delete=models.CASCADE,null=True)
+    created=models.DateTimeField(auto_now_add=True)
+    WBC=models.FloatField()
+    LYMPH=models.FloatField()
+    MONO=models.FloatField()
+    EOSIN=models.FloatField()
+    NEUT=models.FloatField()
+    RBC=models.FloatField()
+    HGB=models.FloatField()
+    HCT= models.FloatField()
+    MCV=models.FloatField()
+    MCH=models.FloatField()
+    MCHC=models.FloatField()
+    PLT=models.FloatField()
+
+
+class BloodChemistry(models.Model):
+    admin=models.ForeignKey(UserAdmin,on_delete=models.CASCADE,null=True)
+    client=models.ForeignKey(Client,on_delete=models.CASCADE,null=True)
+    created=models.DateTimeField(auto_now_add=True)
+    TotalProtien=models.FloatField()
+    Urea=models.FloatField()
+    Gluco=models.FloatField()
+    Calcium=models.FloatField()
+    Ck=models.FloatField()
+    LDH=models.FloatField()
+    AST_GOT=models.FloatField()
+    ALT_GPT= models.FloatField()
+    Albumin=models.FloatField()
+    Phosphorous=models.FloatField()
+    Creatinine=models.FloatField()
+    IRON=models.FloatField()
+
+
+CHOICES=(
+    ('F','Found'),
+    ('N','Not Found')
+)
+class Intestinalparasites(models.Model):
+    admin=models.ForeignKey(UserAdmin,on_delete=models.CASCADE,null=True)
+    client=models.ForeignKey(Client,on_delete=models.CASCADE,null=True)
+    created=models.DateTimeField(auto_now_add=True)
+    COCCIDIA=models.CharField(max_length=1,choices=CHOICES)
+    NEMATODE=models.CharField(max_length=1,choices=CHOICES)
+    CESTODE=models.CharField(max_length=1,choices=CHOICES)
+
+
+
+BLOOD_CHOICES=(
+    ('P','Positive'),
+    ('N','Negative')
+)
+class BloodParasaite(models.Model):
+    admin=models.ForeignKey(UserAdmin,on_delete=models.CASCADE,null=True)
+    client=models.ForeignKey(Client,on_delete=models.CASCADE,null=True)
+    created=models.DateTimeField(auto_now_add=True)
+    THELERIA=models.CharField(max_length=1,choices=BLOOD_CHOICES)
+    BABESIA=models.CharField(max_length=1,choices=BLOOD_CHOICES)
+    ANAPLASMA=models.CharField(max_length=1,choices=BLOOD_CHOICES)  
+    TRYPANOSOMA=models.CharField(max_length=1,choices=BLOOD_CHOICES)  
+     
+
+
+# class DynamicForm(models.Model):
+#     title=models.CharField(max_length=100,null=True,blank=True)
+
+#     def __str__(self):
+#         return self.title
+    
+
+# class DynamicField(models.Model):
+#     form=models.ForeignKey(DynamicForm,on_delete=models.CASCADE)
+#     fieldname=models.CharField(max_length=100)
+#     fieldvalue=models.FloatField(null=True,blank=True)
+
+#     def __str__(self):
+#         return self.fieldname

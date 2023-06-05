@@ -6,3 +6,5 @@ from .models import UserAdmin,Client,Report
 admin.site.register(UserAdmin)
 admin.site.register(Client)
 admin.site.register(Report)
+# admin.site.register(DynamicForm)
+# admin.site.register(DynamicField)

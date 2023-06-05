@@ -1,0 +1,79 @@
+{% extends  'index.html'%}
+
+
+{% block content %} 
+<!-- fields =('TotalProtien','Urea','Gluco','Calcium','Ck','LDH','AST_GOT','ALT_GPT','Albumin','Phosphorous','Creatinine','IRON') -->
+
+<h1 style=" text-align: center;">Blood Chemistry كيمياء الدم</h1>
+
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100vh;
+    margin-top:3vw;
+    text-align: right;
+  ">
+<form style=" margin-left: 5%; margin-top:3vw; " method="POST">
+        {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-4">  
+                Protien بروتين{{ form.TotalProtien }}
+            </div>
+            <div class="form-group col-md-4">  
+                CK  قلب{{ form.Ck }}
+            </div>
+            <div class="form-group col-md-4">  
+                Calcium كالسيوم{{ form.Calcium }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">  
+                Creatinine الكلي{{ form.Creatinine }}
+            </div>
+            <div class="form-group col-md-4">  
+                LDH عضلات{{ form.LDH }}
+            </div>
+            <div class="form-group col-md-4">  
+                Urea اليوريا{{ form.Urea }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">  
+                AST_GOT  الكبد ١{{ form.AST_GOT }}
+            </div>
+            <div class="form-group col-md-4">  
+                ALT_GPT الكبد ٢{{ form.ALT_GPT }}
+            </div>
+            <div class="form-group col-md-4">  
+                Albumin البيومين{{ form.Albumin }}
+            </div>
+         </div>
+        <di class="row">
+            <div class="form-group col-md-4">  
+                Phosphorous الفوسفور{{form.Phosphorous }}
+            </div>
+            <div class="form-group col-md-4">  
+                IRON حديد{{ form.IRON }}
+            </div>
+            <div class="form-group col-md-4">  
+                Gluco جلوكوز{{ form.Gluco }}
+            </div>
+            
+
+        </div>
+        <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
+            <button  class="btn btn-outline-dark" type="submit">Submit</button>
+        </div>    
+    </form>
+    </div>
+</div>
+
+    
+
+
+
+
+{% endblock %}

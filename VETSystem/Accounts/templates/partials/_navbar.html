@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <header>
   <!-- Navbar -->
@@ -25,22 +26,22 @@
         </ul>
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#!">عن المختبر</a>
+            <a class="nav-link" href="#!">About</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#!">لتتواصل</a>
+            <a class="nav-link" href="#!">Contact</a>
           </li>
           <li class="nav-item">  
-            <a class="nav-link" href="/">الصفحه الرئيسيه</a>
+            <a class="nav-link" href="/ar/home/">Home</a>
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href="/register/">انشاء حساب</a>
+            <a class="nav-link" href="/en/register/"> Register</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="/logout/">الخروج</a>
+            <a class="nav-link" href="/en/logout/">Logout</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">{{user.username}}</a>
@@ -48,11 +49,20 @@
 
           {%else%}
           <li class="nav-item">
-            <a class="nav-link" href="/login/">تسجيل الدخول</a>
+            <a class="nav-link" href="/en/login/">Login</a>
           </li>
           {%endif%}
+          <li class="nav-item">
+            <a class="nav-link" href="/ar/">ar</a>
+          </li>
 
-        </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="/en/">en</a>
+          </li>
+
+  
+        
+
 
       </div>
       <a class="navbar-brand" href="#!"><span style="color: #5e9693;">مختبر صحه الكائنات</span><span style="color: #fff;">البيطري</span></a>

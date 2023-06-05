@@ -1,0 +1,62 @@
+{% extends 'index-ar.html' %}
+
+
+
+{% block content %}  
+
+<div class="container">
+
+    <di class=" container">
+    <H1 style="text-align: center;">اضف عميل</H1>    
+    <div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100vh;
+    text-align: right;
+    margin-top:3vw;
+  ">
+    <form style="margin-left: 5%; margin-top:3vw; " method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+
+                 <div class="form-group col-md-4"> 
+                    نوع الحيوان{{form.animaltype}}    
+                 </div>
+                <div class="form-group col-md-4">   
+                    رقم الجوال{{form.phonenumber}}
+                </div> 
+                <div class="form-group col-md-4">   
+                   اسم العميل{{form.clientname}}
+                </div>       
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">   
+                    عمر الحيوان{{form.age}}
+                 </div>  
+                <div class="form-group col-md-6">   
+                    نوع العينه{{form.sampletype}}
+                </div>      
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12"> 
+                    ملحوظه{{form.notes}}    
+                </div>  
+            </div>
+            
+      
+        <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
+            <button  class="btn btn-outline-dark" type="submit">Submit</button>
+        </div>
+    </div>  
+</form>
+</div>
+
+
+</div>
+
+
+{% endblock %}

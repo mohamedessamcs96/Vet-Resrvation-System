@@ -9,7 +9,7 @@
             {%block content%}
       
                 
-                <h1 style=" text-align: center;">تسجيل موظف</h1>
+                <h1 style=" text-align: center;">Add User</h1>
 
                     <div style="
                         display: flex;
@@ -17,7 +17,6 @@
                         align-items: center;
                         height: 50vh;
                         width: 100vh;
-                        text-align: right;
                         margin-top:3vw;
                       ">
                     <form style=" margin-left: 5%; margin-top:3vw; " method="POST">
@@ -27,56 +26,56 @@
 
     
                             <div class="form-group col-md-4">   
-                                اللقب{{register_form.username}}
+                                Username:{{register_form.username}}
                             </div>  
                             <div class="form-group col-md-4">   
-                                الآسم الثاني{{register_form.lname}}
+                               Last Name:{{register_form.lname}}
                             </div>  
                             <div class="form-group col-md-4"> 
-                                الآسم الآول{{register_form.fname}}    
+                                 First Name:{{register_form.fname}}    
                             </div> 
                         </div>  
                         <div class="row">
                             <div class="form-group col-md-6"> 
-                                النوع{{register_form.gender}}    
+                                gender{{register_form.gender}}    
                             </div>
                             <div class="form-group col-md-6">   
-                                تاريخ الميلاد{{register_form.birthdate}}
+                                Date of Birth {{register_form.birthdate}}
                             </div>         
                     </div> 
                     <div class="row">
                         <div class="form-group col-md-6"> 
-                            الرقم السري{{register_form.password1}}    
+                            Password {{register_form.password1}}    
                         </div>
                         <div class="form-group col-md-6">   
-                            تآكيد الرقم السري{{register_form.password2}}
+                        Password Again{{register_form.password2}}
                         </div>   
 
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4"> 
-                        ادمن{{register_form.is_admin}}    
+                        Admin{{register_form.is_admin}}    
                     </div>
                     <div class="form-group col-md-4">   
-                       موظف{{register_form.is_staff}} 
+                       Staff{{register_form.is_staff}} 
                     </div>      
                     <div class="form-group col-md-4">   
-                        مدير{{register_form.is_superuser}} 
+                        Superuser{{register_form.is_superuser}} 
                     </div>   
                 </div>     
                 <div class="row">
                     <div class="form-group col-md-6"> 
-                        دكتور{{register_form.is_advisor}}    
+                        Advisor{{register_form.is_advisor}}    
                     </div>
                     <div class="form-group col-md-6">   
-                       فني{{register_form.is_technichal}} 
+                       Technical{{register_form.is_technichal}} 
                     </div>      
                  
                 </div>   
                 </div>
                 
                 <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
-                    <button  class="btn btn-outline-dark" type="submit">تسجيل</button>
+                    <button  class="btn btn-outline-dark" type="submit">Register</button>
                 </div>
                     </form>
              

@@ -5,29 +5,36 @@
 
 <div class="container">
     
-    <div  style="  text-align: right;  margin-top:3vw; margin-left : 2vw;">
+    <div  style="margin-top:3vw; margin-left : 2vw;">
         
   
         <div class="row">
             <div class="form-group col-md-12">  
                 
-                <h1>بيانات العميل </h1>
+                <h1> Clients Data </h1>
                 <br>
-                <p><strong>اسم العميل:</strong>{{user.clientname}}</p>
-                <p><strong>رقم الجوال:</strong>{{user.phonenumber}}</p>
+                <p><strong>Client name:</strong>{{user.clientname}}</p>
+                <p><strong>Client phonenumber:</strong>{{user.phonenumber}}</p>
    
   
-                <p><strong>نوع الحيوان:</strong>{{user.animaltype}}</p>
+                <p><strong>Animal Type:</strong>{{user.animaltype}}</p>
 
    
 
-                <p><strong>نوع العينه:</strong>{{user.sampletype}}</p>
+                <p><strong>Sample Type:</strong>{{user.sampletype}}</p>
 
-                <p><strong>عمر الحيوان:</strong>{{user.age}}</p>
+                <p><strong>Animal Age:</strong>{{user.age}}</p>
 
-                <p><strong>ملحوظات</strong>{{user.notes}}</p>
+                <p><strong>Notes:</strong>{{user.notes}}</p>
                 <div style=" text-align: center;">
                 <a href="{% url 'createreport'  user.clientnumber %}">Create PDF report </a>
+                </div>
+
+                <div style=" text-align: center;">
+                    <a href="{% url 'bloodchemistry'  user.clientnumber %}">Blood Chemistry </a>
+                    </div>
+                <div style=" text-align: center;">
+                        <a href="{% url 'haematology'  user.clientnumber %}">Haematology</a>
                 </div>
             </div>
 

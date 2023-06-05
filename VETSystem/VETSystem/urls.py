@@ -16,7 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include('Accounts.urls'))
+    path('en/', include(('Accounts.urls'))),
+    path('ar/', include(('Accounts.urls')))
 ]
+
+
+"""
+urlpatterns += i18n_patterns(
+    url(r'^set_language/(?P<language_code>[\w-]+)/$', switch_language, name='switch_language'),
+    # ... other URL patterns
+)
+"""

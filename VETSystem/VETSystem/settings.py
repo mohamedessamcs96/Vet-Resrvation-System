@@ -17,6 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEFAULT_CHARSET = 'utf-8'
 DEFAULT_CONTENT_TYPE = 'text/html; charset=utf-8'
+from django.utils.translation import gettext_lazy as _
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,10 +28,19 @@ SECRET_KEY = "django-insecure-z&i785esl1-nka(2aip(u+5_rh&@8@_diac(tg$0=_t@j-_+n_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+USE_I18N = True
 
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'Accounts.UserAdmin'
+
+
+LANGUAGE_CODE = 'ar'
+
+#WSGI_APPLICATION = 'wsgi.VETSystem'
+
+WSGI_APPLICATION = "VETSystem.wsgi.application"
+
 
 # Application definition
 
@@ -47,11 +57,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
+     'django.middleware.locale.LocaleMiddleware',
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = "VETSystem.urls"
@@ -65,6 +76,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
+                #"django.template.context_processors.il8n",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
@@ -72,7 +84,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "VETSystem.wsgi.application"
 
 
 # Database
@@ -109,6 +120,16 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ar', 'Arabic'),
+]
+
+LOCALE_PATHS = [
+   os.path.join(BASE_DIR, 'locale')
+]
 
 # Base url to serve media files
 MEDIA_URL = '/media/'
