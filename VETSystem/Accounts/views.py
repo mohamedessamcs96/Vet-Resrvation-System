@@ -218,8 +218,7 @@ def Haematology(request,pk):
             response['Content-Disposition'] = 'attachment; filename="EmployeeReport.pdf"'
 
             # Create a PDF document object
-            #doc = SimpleDocTemplate("table.pdf", pagesize=letter)
-               # Create a buffer for the PDF content
+         
             buffer = BytesIO()
             # Set the desired margin size (in this example, 1 inch)
             margin_size = 0.5 * inch
@@ -227,62 +226,15 @@ def Haematology(request,pk):
             doc = SimpleDocTemplate(buffer, pagesize=A4,leftMargin=margin_size, rightMargin=margin_size,
                         topMargin=margin_size, bottomMargin=margin_size,showBoundary=True)
             
-            #   # Set outline parameters
-            # outline_x = 50
-            # outline_y = 50
-            # outline_width = 700
-            # outline_height = 700
-            # outline_thickness = 2
+ 
 
-            # # Draw outline rectangle
-            # doc.setStrokeColorRGB(0, 0, 0)  # Set outline color (black in this example)
-            # doc.setLineWidth(outline_thickness)  # Set outline thickness
-            # doc.rect(outline_x, outline_y, outline_width, outline_height)
-
-            # # Create a list to hold the table data
-            # data = [['Name', 'Age', 'الدوله'],
-            #         ['John', '25', 'مصر'],
-            #         ['Alice', '30', 'Canada'],
-            #         ['Bob', '35', 'Australia']]
-         
-            # HaematologyTable=[
-            #     [get_display(reshaper.reshape('القيمه')),'Type',get_display(reshaper.reshape('نوع التحليل'))],
-            #     [LYMPH,'LYMPH',get_display(reshaper.reshape(f"خلايا لينفاويه"))],
-            #     [MONO,'MONO',get_display(reshaper.reshape(' خلايا وحيده النواه'))],
-            #     [HCT,'HCT',get_display(reshaper.reshape(' الدم'))],
-            #     [MCV,'MCV',get_display(reshaper.reshape(' معدل حجم كريات الدم'))],
-            #     [MCH,'MCH',get_display(reshaper.reshape(' هموجلوبين الكريه الوسط'))],
-            #     [MCHC,'MCHC',get_display(reshaper.reshape(' متوسط تركيز الهموجلوبين'))],
-            #     [PLT,'PLT',get_display(reshaper.reshape(' الصفائح الدمويه'))],
-            #     [HGB,'HGB',get_display(reshaper.reshape(' هموجلوبين'))],
-            #     [NEUT,'NEUT',get_display(reshaper.reshape('الخلايا المتعادله'))],
-            #     [RBC,'RBC',get_display(reshaper.reshape('كريات الدم الحمراء'))]
-            #     ]
            
-            # HaematologyTable=[
-            #     [get_display(reshaper.reshape('القيمه')),get_display(reshaper.reshape('Type نوع التحليل'))],
-            #     [LYMPH,'LYMPH',get_display(reshaper.reshape(f"خلايا لينفاويه"))],
-            #     [MONO,get_display(reshaper.reshape('MONO خلايا وحيده النواه'))],
-            #     [HCT,get_display(reshaper.reshape('HCT الدم'))],
-            #     [MCV,get_display(reshaper.reshape('MCV معدل حجم كريات الدم'))],
-            #     [MCH,get_display(reshaper.reshape('MCH هموجلوبين الكريه الوسط'))],
-            #     [MCHC,get_display(reshaper.reshape('MCHC متوسط تركيز الهموجلوبين'))],
-            #     [PLT,get_display(reshaper.reshape('PLT الصفائح الدمويه'))],
-            #     [HGB,get_display(reshaper.reshape('HGB هموجلوبين'))],
-            #     [EOSIN,get_display(reshaper.reshape('EOSINالخلايا الحامضيه'))],
-            #     [NEUT,get_display(reshaper.reshape('NEUTالخلايا المتعادله'))],
-            #     [RBC,get_display(reshaper.reshape('RBCكريات الدم الحمراء'))]
-            #     ]
 
             # Load custom font file for Arabic text
             font_path = settings.STATIC_ROOT + '/webfonts/22016-adobearabic.ttf'  # Replace with the path to your font file
             print(font_path)
-            #font_path = "/Users/mac/Desktop/VETReservaton/VETSystem/static/webfonts/22016-adobearabic.ttf"  # Replace with the path to your font file
             pdfmetrics.registerFont(TTFont('22016-adobearabic', font_path))
-            # # Preprocess Arabic text using arabic_reshaper and python-bidi
-            # reshaped_data = [[get_display(reshape(str(cell))) for cell in row] for row in data]
-
-            #
+      
             HaematologyTable=[
                 [get_display(reshape('Value القيمه')),get_display(reshape('Type نوع التحليل'))],
                 [WBC,'WBC '],
@@ -298,11 +250,7 @@ def Haematology(request,pk):
                 [NEUT,'NEUT'],
                 [RBC,'RBC']
                 ]
-            #HaematologyTable=get_display(reshaper.reshape(HaematologyTable))
-            #print(HaematologyTable3)
-            #arabic_text_display=reshaper.reshape()
-            #arabic_text_display = get_display(arabic_text_display)
-            #reshaped_text=arabic_reshaper.reshape(arabic_text_display)
+
             # Define table style
             table_style = TableStyle([
                 ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
@@ -336,14 +284,10 @@ def Haematology(request,pk):
                 alignment=1
             )
 
-            #HaematologyTable.setFont('22016-adobearabic',35)
-            # Create a table and specify the style
-            #table=Table(data)
-            # Create the table object with reshaped data
-            #table = Table(HaematologyTable, repeatRows=1)
+         
             haematologytable = Table(HaematologyTable)
             # Increase table size by specifying the width and height
-            #table = Table(haematologytable, colWidths=100, rowHeights=60)
+           
 
             # Create table object and apply style
             haematologytable = Table(HaematologyTable, colWidths=[200, 200])  # Specify column widths here
@@ -399,67 +343,14 @@ def Haematology(request,pk):
 
 
 
-
-
-
-
-
-
-            # table.setStyle(TableStyle([
-            #     ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-            #     ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-            #     ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-            #     ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'), 
-            #     ('FONTSIZE', (0, 0), (-1, 0), 12),
-            #     ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-            #     ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-            #     ('GRID', (0, 0), (-1, -1), 1, colors.black),
-            # ]))
-            # haematologytable.setStyle(TableStyle([
-            #     ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-            #     ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-            #     ('ALIGN', (0, 0), (-1, -1), 'RIGHT'),
-            #     ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'), 
-            #     ('FONTSIZE', (0, 0), (-1, 0), 12),
-            #     ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-            #     ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-            #     ('GRID', (0, 0), (-1, -1), 1, colors.black),
-            # ]))
-
-
-            # Create a FlowableContainer to hold the tables side by side
-            # container = FlowableContainer([
-            #     haematologytable,
-            #     haematologytable,
-            # ], colWidths=[200, 200])
-
-            # Add the table to the PDF document
-            # elements = []
-            # #elements.append([[LYMPH,'LYMPH',get_display(reshaper.reshape(f"خلايا لينفاويه"))]])
-            # #elements.append(table)
-            # elements.append(haematologytable)
-            # doc.build(elements)
-            # # Open the generated PDF file
-            # import subprocess
-            # subprocess.Popen(["open", "table.pdf"])  # Replace with the appropriate
-
-
-
             # Get the value of the BytesIO buffer and write it to the response
             pdf = buffer.getvalue()
             buffer.close()
             response.write(pdf)
-
+            
             return response
-            """
-            Create Table here
-            """
+     
 
-            # Get the current instance object to display in the template
-            img_obj = form.instance
-            return redirect(f'/{language_code}/form_created/')
-            #return render(request, 'add_user.html', {'form': form,'img_obj': img_obj})
-       
         print(form.errors.as_data())
         return render(request,template_name , {'form': form})
     return render(request,template_name , {'form': form})    
