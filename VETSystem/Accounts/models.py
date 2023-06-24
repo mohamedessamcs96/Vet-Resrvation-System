@@ -131,17 +131,3 @@ class BloodParasaite(models.Model):
      
 
 
-# class DynamicForm(models.Model):
-#     title=models.CharField(max_length=100,null=True,blank=True)
-
-#     def __str__(self):
-#         return self.title
-    
-
-# class DynamicField(models.Model):
-#     form=models.ForeignKey(DynamicForm,on_delete=models.CASCADE)
-#     fieldname=models.CharField(max_length=100)
-#     fieldvalue=models.FloatField(null=True,blank=True)
-
-#     def __str__(self):
-#         return self.fieldname

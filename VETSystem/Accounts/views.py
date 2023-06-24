@@ -19,9 +19,10 @@ from bidi.algorithm import get_display
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle,Paragraph,Spacer
 from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+
 from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Image
 from arabic_reshaper import reshape
@@ -54,16 +55,6 @@ def get_error_message(request):
         return "Email already exists"
 
 
-# def change_language(request,language_code):
-#     request.session['django-language']=language_code
-#     print()
-#     request.session.save()
-#     return redirect(request.META.get('HTTP_REFERER','/'))
-
-# from django.utils.translation import activate
-
-# def switch_language(request, language_code):
-#     activate('ar')
 
 
 # Create your views here.
@@ -369,10 +360,164 @@ def BloodChemistry(request,pk):
             BloodChemistry.admin=request.user
             BloodChemistry.client=client
             BloodChemistry.save()
+
+            TotalProtien=request.POST['TotalProtien']
+            Urea=request.POST['Urea']
+            Gluco=request.POST['Gluco']
+            Calcium=request.POST['Calcium']
+            Ck=request.POST['Ck']
+            LDH=request.POST['LDH']
+            AST_GOT=request.POST['AST_GOT']
+            ALT_GPT=request.POST['ALT_GPT']
+            Albumin=request.POST['Albumin']
+            Phosphorous=request.POST['Phosphorous']
+            Creatinine=request.POST['Creatinine']
+            IRON=request.POST['IRON']
             
+            """
+            Create Table here
+            """
+            # Create the HttpResponse object with the appropriate PDF headers.
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="EmployeeReport.pdf"'
+
+            # Create a PDF document object
+         
+            buffer = BytesIO()
+            # Set the desired margin size (in this example, 1 inch)
+            margin_size = 0.5 * inch
+            # Create the PDF object
+            doc = SimpleDocTemplate(buffer, pagesize=A4,leftMargin=margin_size, rightMargin=margin_size,
+                        topMargin=margin_size, bottomMargin=margin_size,showBoundary=True)
+            
+ 
+
+           
+
+            # Load custom font file for Arabic text
+            font_path = settings.STATIC_ROOT + '/webfonts/22016-adobearabic.ttf'  # Replace with the path to your font file
+            print(font_path)
+            pdfmetrics.registerFont(TTFont('22016-adobearabic', font_path))
+      
+            BloodChemistryTable=[
+                [get_display(reshape('Value القيمه')),get_display(reshape('Type النوع '))],
+                [TotalProtien,'TotalProtien '],
+                [Urea,'Urea '],
+                [Gluco,'Gluco'],
+                [Calcium,'Calcium'],
+                [Ck,'Ck'],
+                [LDH,'LDH'],
+                [AST_GOT,'AST_GOT'],
+                [ALT_GPT,'ALT_GPT'],
+                [Albumin,'Albumin'],
+                [Phosphorous,'Phosphorous'],
+                [Creatinine,'Creatinine'],
+                [IRON,'IRON']
+                ]
+
+            # Define table style
+            table_style = TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
+                ('FONTSIZE', (0, 0), (-1, 0), 12),
+                ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ])
+
+            # Create a custom ParagraphStyle
+            custom_style = ParagraphStyle(
+                name='CustomStyle',
+                fontName='22016-adobearabic',  # Specify your custom font name
+                fontSize=14,  # Specify the font size
+                textColor=colors.black,  # Specify the font color
+                spaceBefore=12,  # Specify the space before the paragraph
+                spaceAfter=6,  # Specify the space after the paragraph
+            )
+            # Define a style for center-aligned paragraph
+            center_style = ParagraphStyle(
+                name='CustomStyle',
+                fontName='22016-adobearabic',  # Specify your custom font name
+                fontSize=14,  # Specify the font size
+                textColor=colors.blue,  # Specify the font color
+                spaceBefore=12,  # Specify the space before the paragraph
+                spaceAfter=6,  # Specify the space after the paragraph
+                alignment=1
+            )
+
+         
+            bloodchemistrytable = Table(BloodChemistryTable)
+            # Increase table size by specifying the width and height
+           
+
+            # Create table object and apply style
+            bloodchemistrytable = Table(BloodChemistryTable, colWidths=[200, 200])  # Specify column widths here
+            bloodchemistrytable.setStyle(table_style)
+
+            # Add simple strings above the table
+            client=Client.objects.get(clientnumber=pk) 
+
+            # Add a spacer with horizontal space of 50 points
+            spacer = Spacer(50, 50)
+           
+            # Build the story containing the table
+            story = []    
+            # Define the path to your logo image file
+            #logo_path = settings.MEDIA_URL + 'img/logo.jpg'  # Replace with the actual path to your logo image file
+            logo_path = settings.STATIC_ROOT + '/img/logo.jpg'
+            # Create an Image object with the logo image
+            # Set the desired width and height of the logo (optional)
+  
+
+            # Set the logo's position to the left side of the page
+       
+            logo_image = Image(logo_path, width=2 * inch, height=1 * inch)  # Adjust the width and height as per your requirement
+            logo_image.hAlign = 'RIGHT'
+            # Add the logo image to the story before the table
+            story.append(logo_image)        
+            arabic_text_display = get_display(reshaper.reshape(f' Name: {client.clientname}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+            arabic_text_display = get_display(reshaper.reshape(f' Client Number: {client.clientnumber}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Type: {client.animaltype}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Sample Type: {client.sampletype}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Age: {client.age}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+
+            arabic_text_display = get_display(reshaper.reshape(f' Notes: {client.notes}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+            story.append(spacer)
+            story.append(bloodchemistrytable)
+            story.append(spacer)
+            story.append(spacer)
+            arabic_text_display=reshaper.reshape('مختبر صحه الكائنات البيطريه')
+            arabic_text_display = get_display(arabic_text_display)
+            story.append(Paragraph(arabic_text_display,center_style))
+            # Build the PDF document
+            doc.build(story)
+
+
+
+            # Get the value of the BytesIO buffer and write it to the response
+            pdf = buffer.getvalue()
+            buffer.close()
+            response.write(pdf)
+            
+            return response
+     
+
+
             # Get the current instance object to display in the template
             img_obj = form.instance
-            return redirect(f'/{language_code}/form_created/')
+            #return redirect(f'/{language_code}/form_created/')
             #return render(request, 'add_user.html', {'form': form,'img_obj': img_obj})
        
         print(form.errors.as_data())
@@ -382,247 +527,104 @@ def BloodChemistry(request,pk):
 
 
 
-# def create_report(request, pk):
-#     # Create the HttpResponse object with the appropriate PDF headers.
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = 'attachment; filename="EmployeeReport.pdf"'
-
-#     usertable = Client.objects.get(clientnumber=pk)
-#     #usertable = Client.objects.get(clientnumber=pk)
-#     usertable = Client.objects.filter(clientnumber=pk).first()
-
-
-#     # Create a buffer for the PDF content
-#     buffer = BytesIO()
-
-#     # Create the PDF object
-#     doc = SimpleDocTemplate(buffer, pagesize=letter)
-
-#     # Define the table data
-#     table_data = [
-#         ['العميل', usertable.clientname],
-#         ['رقم', usertable.clientnumber],
-#         ['نوع الحيوان', usertable.animaltype],
-#         ['نوع العينة', usertable.sampletype],
-#         ['عمر الحيوان', usertable.age],
-#         ['ملاحظة', usertable.notes],
-#     ]
-
-#     # Define table style
-#     table_style = TableStyle([
-#         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-#         ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
-#         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-#         ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
-#         ('FONTSIZE', (0, 0), (-1, 0), 12),
-#         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-#         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-#         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-#     ])
-
-#     pdfmetrics.registerFont(TTFont('22016-adobearabic', '/Users/mac/Desktop/VETReservaton/VETSystem/static/webfonts/22016-adobearabic.ttf'))
-#     from rtl import reshaper
-    
-#     pdfmetrics.registerFontFamily('ArabicFamily', normal='ArabicFont', bold='ArabicFont', italic='ArabicFont', boldItalic='ArabicFont')
-    
-#     # Create table object and apply style
-#     table = Table(table_data)
-#     table.setStyle(table_style)
-
-#     if usertable is not None:
-#     # Reshape Arabic text
-#         for i in range(len(table_data)):
-#             for j in range(len(table_data[i])):
-#                 cell_text = table_data[i][j]
-#                 if isinstance(cell_text, str):
-#                     reshaped_text = arabic_reshaper.reshape(cell_text)
-#                     bidi_text = get_display(reshaped_text)
-#                     table_data[i][j] = Paragraph(bidi_text, getSampleStyleSheet()["Normal"])
-                    
-#     # Build the story containing the table
-#     story = [table]
-
-#     # Build the PDF document
-#     doc.build(story)
-
-#     # Get the value of the BytesIO buffer and write it to the response
-#     pdf = buffer.getvalue()
-#     buffer.close()
-#     response.write(pdf)
-
-#     return response
-
-
-
-# def create_report_ar(request,pk):
-
-
-#     # Create the HttpResponse object with the appropriate PDF headers.
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = 'attachment; filename="EmplyeeReport.pdf"'
-
-#     usertable=Client.objects.get(clientnumber=pk)
-    
-
-#     buffer = BytesIO()
-
-#     # Create the PDF object, using the BytesIO object as its "file."
-#     p = canvas.Canvas(buffer)
-#     pdfmetrics.registerFont(TTFont('22016-adobearabic', '/Users/mac/Desktop/VETReservaton/VETSystem/static/webfonts/22016-adobearabic.ttf'))
-#     from rtl import reshaper
-    
-#     #pdfmetrics.registerFontFamily('ArabicFamily', normal='ArabicFont', bold='ArabicFont', italic='ArabicFont', boldItalic='ArabicFont')
-#     from bidi.algorithm import get_display
-
-
-#     # Set outline parameters
-#     outline_x = 50
-#     outline_y = 50
-#     outline_width = 700
-#     outline_height = 700
-#     outline_thickness = 2
-
-#     # Draw outline rectangle
-#     p.setStrokeColorRGB(0, 0, 0)  # Set outline color (black in this example)
-#     p.setLineWidth(outline_thickness)  # Set outline thickness
-#     p.rect(outline_x, outline_y, outline_width, outline_height)
-
-#     p.setPageSize((800, 800)) 
-#     # Draw things on the PDF. Here's where the PDF generation happens.
-#     # See the ReportLab documentation for the full list of functionality.
-#     #reshaped_text=reshaper.reshape("العميل")
-    
-#     arabic_text_display=reshaper.reshape(f'العميل {usertable.clientname}')
-#     arabic_text_display = get_display(arabic_text_display)
-#     #reshaped_text=arabic_reshaper.reshape(arabic_text_display)
-#     p.setFont('22016-adobearabic',35)
-    
-#     p.drawString(370,700, f'   {arabic_text_display}  ')
-    
-#     arabic_text_display=reshaper.reshape(f"رقم:{usertable.clientnumber}")
-#     arabic_text_display = get_display(arabic_text_display)
-#     p.setFont('22016-adobearabic',15)
-#     p.drawString(650,650, f" {arabic_text_display}")
-
-#     arabic_text_display=reshaper.reshape(f"نوع الحيوان:{usertable.animaltype}")
-#     arabic_text_display = get_display(arabic_text_display)
-#     p.drawString(650,550, f"{arabic_text_display}")
-    
-#     arabic_text_display=reshaper.reshape(f'نوع العينه:{usertable.sampletype}')
-#     arabic_text_display = get_display(arabic_text_display)
-#     p.drawString(650,450, f" {arabic_text_display}")
-
-#     arabic_text_display=reshaper.reshape(f'عمرر الحيوان: {usertable.age}')
-#     arabic_text_display = get_display(arabic_text_display)
-#     p.drawString(650,350, f"  {arabic_text_display}")
-
-#     arabic_text_display=reshaper.reshape(f'ملحوظه: {usertable.notes}')
-#     arabic_text_display = get_display(arabic_text_display)
-#     p.drawString(620,250, f"  {arabic_text_display}")
-    
-#     arabic_text_display=reshaper.reshape('مختبر صحه الكائنات البيطريه')
-#     arabic_text_display = get_display(arabic_text_display)
-#     #reshaped_text=arabic_reshaper.reshape(arabic_text_display)
-#     p.setFont('22016-adobearabic',20)
-    
-#     p.drawString(310,100, f' {arabic_text_display}  ')
-    
-
-#     # save the pdf file
-#     # Close the PDF object cleanly.
-#     p.showPage()
-#     p.save()
-
-#     # Get the value of the BytesIO buffer and write it to the response.
-#     pdf = buffer.getvalue()
-#     buffer.close()
-#     response.write(pdf)
-#     return redirect('/form_created')
-
-
-
-
 def create_report(request,pk):
     # Create the HttpResponse object with the appropriate PDF headers.
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="EmplyeeReport.pdf"'
-
-    usertable=Client.objects.get(clientnumber=pk)
-    
-
     buffer = BytesIO()
-
-    # Create the PDF object, using the BytesIO object as its "file."
-    p = canvas.Canvas(buffer)
-
-    
-    #pdfmetrics.registerFontFamily('ArabicFamily', normal='ArabicFont', bold='ArabicFont', italic='ArabicFont', boldItalic='ArabicFont')
-    from bidi.algorithm import get_display
-
-
-    # Set outline parameters
-    outline_x = 50
-    outline_y = 50
-    outline_width = 700
-    outline_height = 700
-    outline_thickness = 2
-
-    # Draw outline rectangle
-    p.setStrokeColorRGB(0, 0, 0)  # Set outline color (black in this example)
-    p.setLineWidth(outline_thickness)  # Set outline thickness
-    p.rect(outline_x, outline_y, outline_width, outline_height)
-
-    p.setPageSize((800, 800)) 
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    #reshaped_text=reshaper.reshape("العميل")
-    
- 
-    p.setFont('Helvetica',35)
-    p.drawString(270,700, f' Client name {usertable.clientname}  ')
-    
-    p.setFont('Helvetica',20)
-    p.drawString(70,650, f" Number:{usertable.clientnumber}")
-
-  
-    p.drawString(70,550, f"Animal Type {usertable.animaltype}")
+    # Set the desired margin size (in this example, 1 inch)
+    margin_size = 0.5 * inch
+    # Create the PDF object
+    doc = SimpleDocTemplate(buffer, pagesize=A4,leftMargin=margin_size, rightMargin=margin_size,
+                topMargin=margin_size, bottomMargin=margin_size,showBoundary=True)
     
 
-    p.drawString(70,450, f" Sample Type {usertable.sampletype}")
+
+           
+
+    # Load custom font file for Arabic text
+    font_path = settings.STATIC_ROOT + '/webfonts/22016-adobearabic.ttf'  # Replace with the path to your font file
+    print(font_path)
+    pdfmetrics.registerFont(TTFont('22016-adobearabic', font_path))
+
+   
+   
+    # Create a custom ParagraphStyle
+    custom_style = ParagraphStyle(
+        name='CustomStyle',
+        fontName='22016-adobearabic',  # Specify your custom font name
+        fontSize=14,  # Specify the font size
+        textColor=colors.black,  # Specify the font color
+        spaceBefore=12,  # Specify the space before the paragraph
+        spaceAfter=6,  # Specify the space after the paragraph
+    )
+    # Define a style for center-aligned paragraph
+    center_style = ParagraphStyle(
+        name='CustomStyle',
+        fontName='22016-adobearabic',  # Specify your custom font name
+        fontSize=14,  # Specify the font size
+        textColor=colors.blue,  # Specify the font color
+        spaceBefore=12,  # Specify the space before the paragraph
+        spaceAfter=6,  # Specify the space after the paragraph
+        alignment=1
+    )
+
+         
 
 
-    p.drawString(70,350, f'Animal Age: {usertable.age}')
+    # Add simple strings above the table
+    client=Client.objects.get(clientnumber=pk) 
 
-    p.drawString(70,250, (f'Notes: {usertable.notes}'))
-
-    # #w, h = A4
-    # # Get the width and height of the page
-    # width, height = letter
-    # from reportlab.lib.pagesizes import letter
-
+    # Add a spacer with horizontal space of 50 points
+    spacer = Spacer(50, 50)
     
+    # Build the story containing the table
+    story = []    
+    # Define the path to your logo image file
+    #logo_path = settings.MEDIA_URL + 'img/logo.jpg'  # Replace with the actual path to your logo image file
+    logo_path = settings.STATIC_ROOT + '/img/logo.jpg'
+    # Create an Image object with the logo image
 
-    pdfmetrics.registerFont(TTFont('22016-adobearabic', '/Users/mac/Desktop/VETReservaton/VETSystem/static/webfonts/22016-adobearabic.ttf'))
+
+
+    # Set the logo's position to the left side of the page
+
+    logo_image = Image(logo_path, width=2 * inch, height=1 * inch)  # Adjust the width and height as per your requirement
+    logo_image.hAlign = 'RIGHT'
+    # Add the logo image to the story before the table
+    story.append(logo_image)        
+    arabic_text_display = get_display(reshaper.reshape(f' Name: {client.clientname}'))
+    story.append(Paragraph(arabic_text_display,custom_style))
+    arabic_text_display = get_display(reshaper.reshape(f' Client Number: {client.clientnumber}'))
+    story.append(Paragraph(arabic_text_display,custom_style))
+
+    arabic_text_display = get_display(reshaper.reshape(f' Animal Type: {client.animaltype}'))
+    story.append(Paragraph(arabic_text_display,custom_style))
+
+    arabic_text_display = get_display(reshaper.reshape(f' Animal Sample Type: {client.sampletype}'))
+    story.append(Paragraph(arabic_text_display,custom_style))
+
+    arabic_text_display = get_display(reshaper.reshape(f' Animal Age: {client.age}'))
+    story.append(Paragraph(arabic_text_display,custom_style))
+
+
+    arabic_text_display = get_display(reshaper.reshape(f' Notes: {client.notes}'))
+    story.append(Paragraph(arabic_text_display,custom_style))
+    story.append(spacer)
+    story.append(spacer)
+    story.append(spacer)
     arabic_text_display=reshaper.reshape('مختبر صحه الكائنات البيطريه')
     arabic_text_display = get_display(arabic_text_display)
-    #reshaped_text=arabic_reshaper.reshape(arabic_text_display)
-    
-    p.setFont('22016-adobearabic',20)
-    
-    p.drawString(310,100, f' {arabic_text_display}  ')
-    
+    story.append(Paragraph(arabic_text_display,center_style))
+    # Build the PDF document
+    doc.build(story)
+   
 
-    # save the pdf file
-    # Close the PDF object cleanly.
-    p.showPage()
-    p.save()
 
-    # Get the value of the BytesIO buffer and write it to the response.
+
+    # Get the value of the BytesIO buffer and write it to the response
     pdf = buffer.getvalue()
     buffer.close()
     response.write(pdf)
-
-    return response 
-
-
-
+    
+    return response
