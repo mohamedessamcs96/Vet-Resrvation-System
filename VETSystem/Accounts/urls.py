@@ -15,10 +15,10 @@ urlpatterns=[
     path('logout/',views.logout_request,name='logout'),
     path('',views.home_page,name='homepage'),
     path('add_user/',views.add_client,name='adduser'),
-
+    path('intestinal_parasites/<int:pk>',views.Intestinalparasites,name='intestinalparasites'),
+    path('blood_parasite/<int:pk>',views.Blood_Parasite,name='bloodparasite'),
     path('haema_tology/<int:pk>',views.Haematology,name='haematology'),
     path('blood_chemistry/<int:pk>',views.BloodChemistry,name='bloodchemistry'),
-
     path('search_user/',views.search_user,name='searchuser'),
     path('form_created/',views.form_created,name='formcreated'),
     path('create_report/<int:pk>',views.create_report,name='createreport'),

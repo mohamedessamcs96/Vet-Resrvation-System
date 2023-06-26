@@ -4,16 +4,28 @@ from django.conf import settings
 # Create your models here.
 
 GENDER_CHOICES=(
-        ('ذ','ذكر'),
-        ('ث','انثي')
+        ('m','male'),
+        ('f','female')
     )
 
 
 ANIMAL_SAMPLES=(
-    ('ش','شامل'),
-    ('ب','بول'),
-    ('ر','روث')
+    ('h','Haematology'),
+    ('b','BIOChemistry'),
+    ('i','Intestinalparasites'),
+    ('p','BloodParasaite'),
+    ('a','All')
 )
+
+class AnalysisPrices(models.Model):
+    Haematology=models.IntegerField()
+    BIOChemistry=models.IntegerField()
+    Intestinalparasites=models.IntegerField()
+    BloodParasaite=models.IntegerField()
+    All=models.IntegerField()
+
+
+
 # Create your models here.
 
 class UserAdmin(AbstractUser):

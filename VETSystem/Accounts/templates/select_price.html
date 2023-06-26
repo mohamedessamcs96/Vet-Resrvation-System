@@ -1,0 +1,52 @@
+{% extends  'index.html'%}
+
+
+{% block content %} 
+
+<h1 style=" text-align: center;">Select Price تحديد السعر</h1>
+
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100vh;
+    margin-top:3vw;
+    text-align: right;
+  ">
+<form  style=" margin-left: 5%; margin-top:3vw; " method="POST">
+        {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-md-4">  
+                Haematology {{ form.Haematology }}
+            </div>
+            <div class="form-group col-md-4">  
+                BIOChemistry  {{ form.BIOChemistry }}
+            </div>
+            <div class="form-group col-md-4">  
+                Intestinalparasites   {{ form.Intestinalparasites }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4">  
+                BloodParasaite   {{ form.BloodParasaite }}
+            </div>
+            <div class="form-group col-md-4">  
+                All   {{ form.All }}
+            </div> 
+        </div>
+       
+        <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
+            <button  class="btn btn-outline-dark" type="submit">Submit</button>
+        </div>    
+    </form>
+    </div>
+</div>
+
+    
+
+
+
+
+{% endblock %}

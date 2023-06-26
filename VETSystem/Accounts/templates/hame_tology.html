@@ -1,76 +1,107 @@
-{% extends  'index.html'%}
+{% extends 'index.html' %}
+
+{% block content %}
+<!-- login section start-->
+<div class="login_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Hametology امراض الدم</h5>
+            <form class="form-signin" method="post">
+              {% csrf_token %}
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form.WBC }}
+                  <label for="inputEmail">WBC مناعة</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form.LYMPH }}
+                  <label for="inputEmail">LYMPH خلايا ليمفاوية</label>
+                </div>
 
 
-{% block content %} 
+              </div>
 
-<h1 style=" text-align: center;">Hametology امراض الدم</h1>
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form.HCT }}
+                  <label for="inputEmail">HCT الدم</label>
+                </div>
 
-<div style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    width: 100vh;
-    margin-top:3vw;
-    text-align: right;
-  ">
-<form  style=" margin-left: 5%; margin-top:3vw; " method="POST">
-        {% csrf_token %}
-    <div class="container">
-        <div class="row">
-            <div class="form-group col-md-4">  
-                WBC مناعه{{ form.WBC }}
-            </div>
-            <div class="form-group col-md-4">  
-                LYMPH خلايا لينفاويه{{ form.LYMPH }}
-            </div>
-            <div class="form-group col-md-4">  
-                MONO خلايا وحيده النواه{{ form.MONO }}
-            </div>
+                <div class="col-md-6">
+                  {{ form.MCV }}
+                  <label for="inputEmail">MCV معدل حجم كريات الدم</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form.MCHC }}
+                  <label for="inputEmail">MCHC متوسط تركيز الهيموجلوبين</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form.PLT }}
+                  <label for="inputEmail">PLT الصفائح الدموية</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form.MONO }}
+                  <label for="inputEmail">MONO خلايا وحيدة النواة</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form.NEUT }}
+                  <label for="inputEmail">NEUT الخلايا المتعادلة</label>
+                </div>
+              </div>
+
+
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form.PLT }}
+                  <label for="inputEmail">PLT الصفائح الدموية</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form.EOSIN }}
+                  <label for="inputEmail">EOSIN الخلايا الحمضية</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form.RBC }}
+                  <label for="inputEmail">RBC كريات الدم الحمراء</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.HGB }}
+                    <label for="inputEmail">HGB هيموجلوبين</label>
+                  </div>
+              </div>
+              <div class="form-label-group row">
+
+                <div class="col-md-12">
+                  {{ form.MCH }}
+                  <label for="inputEmail">MCH هيموجلوبين الكريه الوسط</label>
+                </div>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+              <hr class="my-4">
+            </form>
+          </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">  
-            HCTالدم{{ form.HCT }}
-            </div>
-            <div class="form-group col-md-4">  
-            MCVمعدل حجم كريات الدم{{ form.MCV }}
-            </div>
-            <div class="form-group col-md-4">  
-                MCHهموجلوبين الكريه الوسط{{ form.MCH }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-4">  
-                MCHCمتوسط تركيز الهموجلوبين{{ form.MCHC }}
-            </div>
-            <div class="form-group col-md-4">  
-                PLTالصفائح الدمويه{{ form.PLT }}
-            </div>
-            <div class="form-group col-md-4">  
-                HGBهموجلوبين{{ form.HGB }}
-            </div>
-         </div>
-        <di class="row">
-            <div class="form-group col-md-4">  
-                EOSINالخلايا الحامضيه{{form.EOSIN }}
-            </div>
-            <div class="form-group col-md-4">  
-                NEUTالخلايا المتعادله{{ form.NEUT }}
-            </div>
-            <div class="form-group col-md-4">  
-                RBCكريات الدم الحمراء{{ form.RBC }}
-            </div>
-        </div>
-        <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
-            <button  class="btn btn-outline-dark" type="submit">Submit</button>
-        </div>    
-    </form>
+      </div>
     </div>
+  </div>
 </div>
-
-    
-
-
-
-
+<!-- login section end-->
 {% endblock %}

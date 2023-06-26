@@ -40,7 +40,8 @@ LANGUAGE_CODE = 'ar'
 #WSGI_APPLICATION = 'wsgi.VETSystem'
 
 WSGI_APPLICATION = "VETSystem.wsgi.application"
-
+# Application definition
+CRISPY_TEMPLATE_PACK='bootstrap4'
 
 # Application definition
 
@@ -51,7 +52,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'Accounts'
+    'Accounts',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +155,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+DEBUG = True
+if DEBUG:
+    # Disable caching during development
+    from django.views.decorators.cache import never_cache
+
+    # Apply the 'never_cache' decorator to the view functions where CSS files are loaded
+
+# ...

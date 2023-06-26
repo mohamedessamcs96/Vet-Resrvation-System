@@ -1,79 +1,103 @@
-{% extends  'index.html'%}
+{% extends 'index.html' %}
+
+{% block content %}
+<!-- login section start-->
+<div class="login_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Blood Chemistry كيمياء الدم</h5>
+            <form class="form-signin" method="post">
+              {% csrf_token %}
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form.TotalProtien }}
+                  <label for="inputEmail"> Protien بروتين</label>
+                </div>
+
+                <div class="col-md-6">
+                   {{ form.Ck }}
+                  <label for="inputEmail"> CK  قلب</label>
+                </div>
 
 
-{% block content %} 
-<!-- fields =('TotalProtien','Urea','Gluco','Calcium','Ck','LDH','AST_GOT','ALT_GPT','Albumin','Phosphorous','Creatinine','IRON') -->
+              </div>
 
-<h1 style=" text-align: center;">Blood Chemistry كيمياء الدم</h1>
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form.Calcium }}
+                  <label for="inputEmail">Calcium كالسيوم</label>
+                </div>
 
-<div style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    width: 100vh;
-    margin-top:3vw;
-    text-align: right;
-  ">
-<form style=" margin-left: 5%; margin-top:3vw; " method="POST">
-        {% csrf_token %}
-    <div class="container">
-        <div class="row">
-            <div class="form-group col-md-4">  
-                Protien بروتين{{ form.TotalProtien }}
-            </div>
-            <div class="form-group col-md-4">  
-                CK  قلب{{ form.Ck }}
-            </div>
-            <div class="form-group col-md-4">  
-                Calcium كالسيوم{{ form.Calcium }}
-            </div>
+                <div class="col-md-6">
+                    {{ form.Creatinine }}
+                    <label for="inputEmail">Creatinine الكلي</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form.LDH }}                  
+                    <label for="inputEmail">LDH عضلات</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.Urea }}
+                  <label for="inputEmail">Urea اليوريا</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form.AST_GOT }}
+                    <label for="inputEmail">AST_GOT  الكبد ١</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.ALT_GPT }}
+                  <label for="inputEmail">ALT_GPT الكبد ٢</label>
+                </div>
+              </div>
+
+
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form.Albumin }} 
+                    <label for="inputEmail">Albumin البيومين</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{form.Phosphorous }} 
+                    <label for="inputEmail">Phosphorous الفوسفور</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form.IRON }}
+                    <label for="inputEmail">IRON حديد</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.Gluco }}                   
+                    <label for="inputEmail">Gluco جلوكوز</label>
+                  </div>
+              </div>
+
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+              <hr class="my-4">
+            </form>
+          </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">  
-                Creatinine الكلي{{ form.Creatinine }}
-            </div>
-            <div class="form-group col-md-4">  
-                LDH عضلات{{ form.LDH }}
-            </div>
-            <div class="form-group col-md-4">  
-                Urea اليوريا{{ form.Urea }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-4">  
-                AST_GOT  الكبد ١{{ form.AST_GOT }}
-            </div>
-            <div class="form-group col-md-4">  
-                ALT_GPT الكبد ٢{{ form.ALT_GPT }}
-            </div>
-            <div class="form-group col-md-4">  
-                Albumin البيومين{{ form.Albumin }}
-            </div>
-         </div>
-        <di class="row">
-            <div class="form-group col-md-4">  
-                Phosphorous الفوسفور{{form.Phosphorous }}
-            </div>
-            <div class="form-group col-md-4">  
-                IRON حديد{{ form.IRON }}
-            </div>
-            <div class="form-group col-md-4">  
-                Gluco جلوكوز{{ form.Gluco }}
-            </div>
-            
-
-        </div>
-        <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
-            <button  class="btn btn-outline-dark" type="submit">Submit</button>
-        </div>    
-    </form>
+      </div>
     </div>
+  </div>
 </div>
-
-    
-
-
-
-
+<!-- login section end-->
 {% endblock %}
+
+

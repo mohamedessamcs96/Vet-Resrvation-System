@@ -1,22 +1,51 @@
-{% extends  'index.html'%}
-
-
-{% block content %}  
+{% extends 'index.html' %}
 
 
 
-    <div style=" margin-top:20px;margin-bottom:20px;">
-        <div>
-        <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit" class="btn btn-outline-dark">Search</button>
-        </form>
-    </div>
 
-    
+<!Doctype html>
+<html>
+    <head></head>
+    <body>
+        {% block content %}   
+             <!-- login section start-->
 
-</div>
+  <div class="login_section">
+    <div class="container">
+   <div class="row">
+     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+       <div class="card card-signin my-5">
+         <div class="card-body">
+           <h5 class="card-title text-center">Search by phone</h5>
+           <form class="form-signin" method="post">
+            {% csrf_token %}
+             <div class="form-label-group">
+                {{ form.phonenumber }}             
+                <label for="inputEmail">Phone Number</label>
+             </div>
 
 
-{% endblock %}
+
+          
+             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Search</button>
+             <hr class="my-4">
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+   </div>
+ </div>
+ <!-- login section end-->
+            
+
+        {% endblock %}
+    </body>
+</html>
+
+
+
+
+
+

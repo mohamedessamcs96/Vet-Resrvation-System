@@ -1,61 +1,75 @@
-{% extends  'index.html'%}
+{% extends 'index.html' %}
+<!Doctype html>
+<html>
+    <head>
+        <style>
+            .form-label-group label {
+            display: inline-block;
+            margin-right: 10px;
+            }
 
+            .form-label-group select {
+            display: inline-block;
+            width: 200px; /* Adjust the width as needed */
+            }
+        </style>
+    </head>
+    <body>
+{% block content %}   
+<!-- login section start-->
 
-{% block content %}  
-
-<div class="container">
-
-    <di class=" container">
-    <H1 style="text-align: center;">Add Client</H1>    
-    <div style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    width: 100vh;
-   
-    margin-top:3vw;
-  ">
-    <form style="margin-left: 5%; margin-top:3vw; " method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="container">
-            <div class="row">
-
-                 <div class="form-group col-md-4"> 
-                     Animal Type {{form.animaltype}}    
-                 </div>
-                <div class="form-group col-md-4">   
-                    Phone Number {{form.phonenumber}}
+  <div class="login_section">
+    <div class="container">
+   <div class="row">
+     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+       <div class="card card-signin my-5">
+         <div class="card-body">
+           <h5 class="card-title text-center">Add Client اضف عميل</h5>
+           <form class="form-signin" method="post">
+            {% csrf_token %}
+                          
+                <div class="form-label-group">
+                    {{form.animaltype}}              
+                    <label for="inputEmail">Animal Type</label>
+                </div>
+                    
+                <div class="form-label-group">
+                   {{form.phonenumber}}
+                   <label for="inputEmail">Phone Number</label>
                 </div> 
-                <div class="form-group col-md-4">   
-                    Client Name{{form.clientname}}
-                </div>       
+                        
+                <div class="form-label-group">
+                   {{form.clientname}}
+                   <label for="inputEmail">Client Name</label>
+                </div>
 
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">   
-                    Animal Age {{form.age}}
-                 </div>  
-                <div class="form-group col-md-6">   
-                    Sample Type{{form.sampletype}}
-                </div>      
-            </div>
-            <div class="row">
-                <div class="form-group col-md-12"> 
-                    Notes{{form.notes}}    
-                </div>  
-            </div>
+                <div class="form-label-group">
+                   {{form.age}}
+                    <label for="inputEmail">Animal Age</label>
+                 </div>                    
+                 <div class="form-group">
+                    <div class="form-label-group">
+                    <small class="form-text text-muted">Select a sample type</small>
+                      {{ form.sampletype }}
+
+                    </div>
+                  </div>
+                 <div class="form-label-group">
+                    {{form.notes}}
+                    <label for="inputEmail">Notes</label>
+                 </div>      
+          
+             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add User</button>
+             <hr class="my-4">
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+   </div>
+ </div>
+ <!-- login section end-->
             
-      
-        <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
-            <button  class="btn btn-outline-dark" type="submit">Submit</button>
-        </div>
-    </div>  
-</form>
-</div>
-
-
-</div>
-
 
 {% endblock %}

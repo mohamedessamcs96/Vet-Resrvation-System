@@ -1,37 +1,40 @@
 {% extends 'index.html' %}
 {% load static %}
-<!Doctype html>
-<html>
-    <head></head>
-    <body>
-        
-        {%block content%}
+
+
+{%block content%}
+<div class="login_section">
+    <div class="container">
+   <div class="row">
+     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+       <div class="card card-signin my-5">
+         <div class="card-body">
+           <h5 class="card-title text-center">Select Option</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/en/search_user/">
+                    <div class="circle-image">
+                    <img src="{% static 'img/hourse1.jpg' %}" alt="Description of the image">
+                        
+                </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="/en/add_user/">
+                    <div class="circle-image"> 
+                    <img src="{% static 'img/hourses2.jpg' %}" alt="Description of the image">
+                </div>
+                </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+
        
 
-        <h1  class="display-4" style=" text-align: center;">Home Page</h1>
-        <div style=" margin-left: 25%; margin-top:20px;margin-bottom:20px;">
-            <div class="container">
-                <div class="image-container">
-                   
-                    <a href="/en/search_user/">
-                        <div class="circle-image">
-                        <img src="{% static 'img/hourse1.jpg' %}" alt="Description of the image">
-                            
-                    </div>
-                    </a>
-                    
-                </div>
-                
-                    <a href="/en/add_user/">
-                        <div class="circle-image"> 
-                        <img src="{% static 'img/hourses2.jpg' %}" alt="Description of the image">
-                        </div>
-                    </a>
-                </div>
-                
-        </div>
-
-    </div>
         {% endblock %}
     </body>
 </html>

@@ -1,88 +1,112 @@
 {% extends 'index.html' %}
-
 <!Doctype html>
 <html>
-    <head></head>
+    <head>
+        <style>
+            .form-label-group label {
+            display: inline-block;
+            margin-right: 10px;
+            }
+
+            .form-label-group select {
+            display: inline-block;
+            width: 200px; /* Adjust the width as needed */
+            }
+        </style>
+    </head>
     <body>
-      {% include 'partials/messages.html' %}
-        
-            {%block content%}
-      
-                
-                <h1 style=" text-align: center;">Add User</h1>
+{% block content %}   
+<!-- login section start-->
+{% include 'partials/messages.html' %}
 
-                    <div style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 50vh;
-                        width: 100vh;
-                        margin-top:3vw;
-                      ">
-                    <form style=" margin-left: 5%; margin-top:3vw; " method="POST">
-                        {% csrf_token %}
-                    <div class="container">
-                        <div class="row">
+  <div class="login_section">
+    <div class="container">
+   <div class="row">
+     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+       <div class="card card-signin my-5">
+         <div class="card-body">
+           <h5 class="card-title text-center">Add  User اضف موظف</h5>
+           <form class="form-signin" method="post">
+            {% csrf_token %}
+                          
 
-    
-                            <div class="form-group col-md-4">   
-                                Username:{{register_form.username}}
-                            </div>  
-                            <div class="form-group col-md-4">   
-                               Last Name:{{register_form.lname}}
-                            </div>  
-                            <div class="form-group col-md-4"> 
-                                 First Name:{{register_form.fname}}    
-                            </div> 
-                        </div>  
-                        <div class="row">
-                            <div class="form-group col-md-6"> 
-                                gender{{register_form.gender}}    
-                            </div>
-                            <div class="form-group col-md-6">   
-                                Date of Birth {{register_form.birthdate}}
-                            </div>         
-                    </div> 
-                    <div class="row">
-                        <div class="form-group col-md-6"> 
-                            Password {{register_form.password1}}    
-                        </div>
-                        <div class="form-group col-md-6">   
-                        Password Again{{register_form.password2}}
-                        </div>   
-
+            <div class="form-label-group">
+                {{register_form.email}}    
+                 <label for="inputEmail">Email البريد الالكتروني</label>
+             </div> 
+                <div class="form-label-group">
+                    {{register_form.username}}
+                    <label for="inputEmail">Username اسم مستخدم</label>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-4"> 
-                        Admin{{register_form.is_admin}}    
+                    
+                <div class="form-label-group">
+                   {{register_form.fname}}    
+                    <label for="inputEmail"> First Name الاسم الاول</label>
+                </div> 
+
+                <div class="form-label-group">
+                    {{register_form.lname}}    
+                     <label for="inputEmail">Last Name الاسم الثاني</label>
+                 </div> 
+                 <div class="form-group">
+                    <div class="form-label-group">
+                    <small class="form-text text-muted">Select Gender نوع</small>
+                    {{register_form.gender}}  
                     </div>
-                    <div class="form-group col-md-4">   
-                       Staff{{register_form.is_staff}} 
-                    </div>      
-                    <div class="form-group col-md-4">   
-                        Superuser{{register_form.is_superuser}} 
-                    </div>   
-                </div>     
-                <div class="row">
-                    <div class="form-group col-md-6"> 
-                        Advisor{{register_form.is_advisor}}    
+                  </div>
+          
+                <div class="form-label-group">
+                     {{register_form.password1}}    
+
+                    <label for="inputEmail">Password الرقم سري </label>
+                 </div> 
+                 <div class="form-label-group">
+                    {{register_form.password2}}    
+
+                   <label for="inputEmail">Password Again اعد الرقم السري</label>
+                </div>                     
+                 <div class="form-group">
+                    <div class="form-label-group">
+                    <small class="form-text text-muted">Select Date of Birth اختر تاريخ ميلاد</small>
+                    {{register_form.birthdate}}
+
                     </div>
-                    <div class="form-group col-md-6">   
-                       Technical{{register_form.is_technichal}} 
-                    </div>      
-                 
-                </div>   
+                  </div>
+                  <div class="form-group">
+                    <div class="form-label-group">
+                    <small class="form-text text-muted">Admin </small>
+                    {{register_form.is_admin}}    
+                 </div> 
+                 </div>
+                 <div class="form-group">
+                    <div class="form-label-group">
+                    <small class="form-text text-muted">Superuser</small>
+                    {{register_form.is_superuser}}    
                 </div>
-                
-                <div style="text-align: center; margin-top:20px;margin-bottom:20px;">
-                    <button  class="btn btn-outline-dark" type="submit">Register</button>
-                </div>
-                    </form>
-             
-                </div>
-            {% endblock %}
-    
-    </body>
-</html>
+                 </div>    
+                 <div class="form-group">
+                    <div class="form-label-group">
+                    <small class="form-text text-muted">Technichal</small>
+                    {{register_form.is_technichal}}    
+                 </div>   
+                 </div>  
+                 <div class="form-group">
+                    <div class="form-label-group">
+                    <small class="form-text text-muted">Advisor</small>
+                    {{register_form.is_advisor}}    
+                 </div>  
+                 </div>            
+             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add User</button>
+             <hr class="my-4">
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+   </div>
+ </div>
+ <!-- login section end-->
+            
 
-
+{% endblock %}

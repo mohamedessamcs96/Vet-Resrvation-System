@@ -28,7 +28,6 @@ from reportlab.platypus import SimpleDocTemplate, Image
 from arabic_reshaper import reshape
 
 from django.http import HttpResponse
-#from django.utils.translation import gettext as _
 
 
 from django import forms
@@ -40,7 +39,8 @@ from .forms import AdminForm,AddClient,SearchUserForm,LoginForm,HaematologyForm,
 
 
 
-@login_required(login_url='/login') 
+
+@login_required(login_url='/ar/login/')
 def form_created(request):
     return render(request,'form_created.html')
 
@@ -58,6 +58,8 @@ def get_error_message(request):
 
 
 # Create your views here.
+
+@login_required(login_url='/ar/login/')
 def register_request(request):
     language_code = request.path.split('/')[1]  # Extract the first part of the path
     #template_name='register.html' if language_code=='en' else 'register-ar.html'
@@ -115,7 +117,7 @@ def logout_request(request):
     return redirect("login")
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/ar/login/')
 def add_client(request):
     language_code = request.path.split('/')[1]  # Extract the first part of the path
     template_name='add_user.html' if language_code=='en' else 'add_user-ar.html'
@@ -140,7 +142,8 @@ def add_client(request):
 
 from django.utils.translation import activate
 
-@login_required(login_url='/login') 
+
+@login_required(login_url='/ar/login/')
 def home_page(request):
     #lang = request.GET.get('lang', 'en')  # Default to English if the language is not specified
     #activate(lang)
@@ -149,17 +152,17 @@ def home_page(request):
     return render(request,template_name)
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/ar/login/')
 def search_user(request):
     if request.method == 'POST':
         form=SearchUserForm(request.POST)
-        print(request.POST['clientnumber'])
-        print(type(request.POST['clientnumber']))
-        clientnumber=(request.POST['clientnumber'])
-        print(type(clientnumber))
+        print(request.POST['phonenumber'])
+        print(type(request.POST['phonenumber']))
+        phonenumber=(request.POST['phonenumber'])
+        print(type(phonenumber))
         print("user")
-        users=Client.objects.filter(clientnumber=clientnumber)
-        user=Client.objects.get(clientnumber=clientnumber)
+        users=Client.objects.filter(phonenumber=phonenumber)
+        user=Client.objects.get(phonenumber=phonenumber)
         
         if user!=None: 
             context={'form':form,'users':users,'user':user}
@@ -172,8 +175,337 @@ def search_user(request):
 
 
 
+from .forms import IntestinalparasitesForm,BloodParasaiteForm
 
-@login_required(login_url='/login/')
+
+@login_required(login_url='/ar/login/')
+def Blood_Parasite(request,pk):
+    #language_code = request.path.split('/')[1]  # Extract the first part of the path
+    """Process images uploaded by users"""
+    form = BloodParasaiteForm()
+    if request.method == 'POST':
+        form = BloodParasaiteForm(request.POST)
+        if form.is_valid():
+            BloodParasaite=form.save(commit=False)  
+            client=Client.objects.get(clientnumber=pk) 
+            BloodParasaite.admin=request.user
+            BloodParasaite.client=client
+            BloodParasaite.save()
+            
+            THELERIA=request.POST['THELERIA']
+            BABESIA=request.POST['BABESIA']
+            ANAPLASMA=request.POST['ANAPLASMA']
+            TRYPANOSOMA=request.POST['TRYPANOSOMA']
+        
+            
+            """
+            Create Table here
+            """
+            # Create the HttpResponse object with the appropriate PDF headers.
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="EmployeeReport.pdf"'
+
+            # Create a PDF document object
+         
+            buffer = BytesIO()
+            # Set the desired margin size (in this example, 1 inch)
+            margin_size = 0.5 * inch
+            # Create the PDF object
+            doc = SimpleDocTemplate(buffer, pagesize=A4,leftMargin=margin_size, rightMargin=margin_size,
+                        topMargin=margin_size, bottomMargin=margin_size,showBoundary=True)
+            
+ 
+
+           
+
+            # Load custom font file for Arabic text
+            font_path = settings.STATIC_ROOT + '/webfonts/22016-adobearabic.ttf'  # Replace with the path to your font file
+            print(font_path)
+            pdfmetrics.registerFont(TTFont('22016-adobearabic', font_path))
+      
+            IntestinalparasitesTable=[
+                [get_display(reshape('Value القيمه')),get_display(reshape('Type نوع التحليل'))],
+                [THELERIA,'THELERIA '],
+                [BABESIA,'BABESIA '],
+                [ANAPLASMA,'ANAPLASMA'],
+                [TRYPANOSOMA,'TRYPANOSOMA'],
+                ]
+
+            # Define table style
+            table_style = TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
+                ('FONTSIZE', (0, 0), (-1, 0), 12),
+                ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ])
+            from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+
+            # Create a custom ParagraphStyle
+            custom_style = ParagraphStyle(
+                name='CustomStyle',
+                fontName='22016-adobearabic',  # Specify your custom font name
+                fontSize=14,  # Specify the font size
+                textColor=colors.black,  # Specify the font color
+                spaceBefore=12,  # Specify the space before the paragraph
+                spaceAfter=6,  # Specify the space after the paragraph
+            )
+            # Define a style for center-aligned paragraph
+            center_style = ParagraphStyle(
+                name='CustomStyle',
+                fontName='22016-adobearabic',  # Specify your custom font name
+                fontSize=14,  # Specify the font size
+                textColor=colors.blue,  # Specify the font color
+                spaceBefore=12,  # Specify the space before the paragraph
+                spaceAfter=6,  # Specify the space after the paragraph
+                alignment=1
+            )
+
+         
+            BloodParasaiteTable = Table(IntestinalparasitesTable)
+            # Increase table size by specifying the width and height
+           
+
+            # Create table object and apply style
+            bloodParasaiteTable = Table(BloodParasaiteTable, colWidths=[200, 200])  # Specify column widths here
+            bloodParasaiteTable.setStyle(table_style)
+
+            # Add simple strings above the table
+            client=Client.objects.get(clientnumber=pk) 
+
+            # Add a spacer with horizontal space of 50 points
+            spacer = Spacer(50, 50)
+           
+            # Build the story containing the table
+            story = []    
+            # Define the path to your logo image file
+            #logo_path = settings.MEDIA_URL + 'img/logo.jpg'  # Replace with the actual path to your logo image file
+            logo_path = settings.STATIC_ROOT + '/img/logo.jpg'
+            # Create an Image object with the logo image
+            # Set the desired width and height of the logo (optional)
+  
+
+            # Set the logo's position to the left side of the page
+       
+            logo_image = Image(logo_path, width=2 * inch, height=1 * inch)  # Adjust the width and height as per your requirement
+            logo_image.hAlign = 'RIGHT'
+            # Add the logo image to the story before the table
+            story.append(logo_image)        
+            arabic_text_display = get_display(reshaper.reshape(f' Name: {client.clientname}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+            arabic_text_display = get_display(reshaper.reshape(f' Client Number: {client.clientnumber}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Type: {client.animaltype}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Sample Type: {client.sampletype}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Age: {client.age}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+
+            arabic_text_display = get_display(reshaper.reshape(f' Notes: {client.notes}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+            story.append(spacer)
+            story.append(bloodParasaiteTable)
+            story.append(spacer)
+            story.append(spacer)
+            arabic_text_display=reshaper.reshape('مختبر صحه الكائنات البيطريه')
+            arabic_text_display = get_display(arabic_text_display)
+            story.append(Paragraph(arabic_text_display,center_style))
+            # Build the PDF document
+            doc.build(story)
+
+
+
+            # Get the value of the BytesIO buffer and write it to the response
+            pdf = buffer.getvalue()
+            buffer.close()
+            response.write(pdf)
+            
+            return response
+     
+
+        print(form.errors.as_data())
+        return render(request,'blood_parasite.html' , {'form': form})
+    return render(request,'blood_parasite.html' , {'form': form}) 
+
+
+
+
+
+
+
+
+@login_required(login_url='/ar/login/')
+def Intestinalparasites(request,pk):
+    #language_code = request.path.split('/')[1]  # Extract the first part of the path
+    """Process images uploaded by users"""
+    form = IntestinalparasitesForm()
+    if request.method == 'POST':
+        form = IntestinalparasitesForm(request.POST)
+        if form.is_valid():
+            Intestinalparasites=form.save(commit=False)  
+            client=Client.objects.get(clientnumber=pk) 
+            Intestinalparasites.admin=request.user
+            Intestinalparasites.client=client
+            Intestinalparasites.save()
+            
+            COCCIDIA=request.POST['COCCIDIA']
+            NEMATODE=request.POST['NEMATODE']
+            CESTODE=request.POST['CESTODE']
+        
+            
+            """
+            Create Table here
+            """
+            # Create the HttpResponse object with the appropriate PDF headers.
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="EmployeeReport.pdf"'
+
+            # Create a PDF document object
+         
+            buffer = BytesIO()
+            # Set the desired margin size (in this example, 1 inch)
+            margin_size = 0.5 * inch
+            # Create the PDF object
+            doc = SimpleDocTemplate(buffer, pagesize=A4,leftMargin=margin_size, rightMargin=margin_size,
+                        topMargin=margin_size, bottomMargin=margin_size,showBoundary=True)
+            
+ 
+
+           
+
+            # Load custom font file for Arabic text
+            font_path = settings.STATIC_ROOT + '/webfonts/22016-adobearabic.ttf'  # Replace with the path to your font file
+            print(font_path)
+            pdfmetrics.registerFont(TTFont('22016-adobearabic', font_path))
+      
+            IntestinalparasitesTable=[
+                [get_display(reshape('Value القيمه')),get_display(reshape('Type نوع التحليل'))],
+                [COCCIDIA,'COCCIDIA '],
+                [NEMATODE,'NEMATODE '],
+                [CESTODE,'CESTODE'],
+       
+                ]
+
+            # Define table style
+            table_style = TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
+                ('FONTSIZE', (0, 0), (-1, 0), 12),
+                ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ])
+            from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+
+            # Create a custom ParagraphStyle
+            custom_style = ParagraphStyle(
+                name='CustomStyle',
+                fontName='22016-adobearabic',  # Specify your custom font name
+                fontSize=14,  # Specify the font size
+                textColor=colors.black,  # Specify the font color
+                spaceBefore=12,  # Specify the space before the paragraph
+                spaceAfter=6,  # Specify the space after the paragraph
+            )
+            # Define a style for center-aligned paragraph
+            center_style = ParagraphStyle(
+                name='CustomStyle',
+                fontName='22016-adobearabic',  # Specify your custom font name
+                fontSize=14,  # Specify the font size
+                textColor=colors.blue,  # Specify the font color
+                spaceBefore=12,  # Specify the space before the paragraph
+                spaceAfter=6,  # Specify the space after the paragraph
+                alignment=1
+            )
+
+         
+            intestinalparasitesTable = Table(IntestinalparasitesTable)
+            # Increase table size by specifying the width and height
+           
+
+            # Create table object and apply style
+            intestinalparasitesTable = Table(IntestinalparasitesTable, colWidths=[200, 200])  # Specify column widths here
+            intestinalparasitesTable.setStyle(table_style)
+
+            # Add simple strings above the table
+            client=Client.objects.get(clientnumber=pk) 
+
+            # Add a spacer with horizontal space of 50 points
+            spacer = Spacer(50, 50)
+           
+            # Build the story containing the table
+            story = []    
+            # Define the path to your logo image file
+            #logo_path = settings.MEDIA_URL + 'img/logo.jpg'  # Replace with the actual path to your logo image file
+            logo_path = settings.STATIC_ROOT + '/img/logo.jpg'
+            # Create an Image object with the logo image
+            # Set the desired width and height of the logo (optional)
+  
+
+            # Set the logo's position to the left side of the page
+       
+            logo_image = Image(logo_path, width=2 * inch, height=1 * inch)  # Adjust the width and height as per your requirement
+            logo_image.hAlign = 'RIGHT'
+            # Add the logo image to the story before the table
+            story.append(logo_image)        
+            arabic_text_display = get_display(reshaper.reshape(f' Name: {client.clientname}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+            arabic_text_display = get_display(reshaper.reshape(f' Client Number: {client.clientnumber}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Type: {client.animaltype}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Sample Type: {client.sampletype}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+            arabic_text_display = get_display(reshaper.reshape(f' Animal Age: {client.age}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+
+
+            arabic_text_display = get_display(reshaper.reshape(f' Notes: {client.notes}'))
+            story.append(Paragraph(arabic_text_display,custom_style))
+            story.append(spacer)
+            story.append(intestinalparasitesTable)
+            story.append(spacer)
+            story.append(spacer)
+            arabic_text_display=reshaper.reshape('مختبر صحه الكائنات البيطريه')
+            arabic_text_display = get_display(arabic_text_display)
+            story.append(Paragraph(arabic_text_display,center_style))
+            # Build the PDF document
+            doc.build(story)
+
+
+
+            # Get the value of the BytesIO buffer and write it to the response
+            pdf = buffer.getvalue()
+            buffer.close()
+            response.write(pdf)
+            
+            return response
+     
+
+        print(form.errors.as_data())
+        return render(request,'intestinal_parasites.html' , {'form': form})
+    return render(request,'intestinal_parasites.html' , {'form': form}) 
+
+
+
+
+
+
+
+
+@login_required(login_url='/ar/login/')
 def Haematology(request,pk):
     language_code = request.path.split('/')[1]  # Extract the first part of the path
     template_name='hame_tology.html' if language_code=='en' else 'hame_tology.html'
@@ -346,7 +678,8 @@ def Haematology(request,pk):
         return render(request,template_name , {'form': form})
     return render(request,template_name , {'form': form})    
   
-@login_required(login_url='/login/')
+
+@login_required(login_url='/ar/login/')
 def BloodChemistry(request,pk):
     language_code = request.path.split('/')[1]  # Extract the first part of the path
     template_name='bio_chemestry.html' if language_code=='en' else 'bio_chemestry.html'
@@ -527,6 +860,7 @@ def BloodChemistry(request,pk):
 
 
 
+@login_required(login_url='/ar/login/')
 def create_report(request,pk):
     # Create the HttpResponse object with the appropriate PDF headers.
     response = HttpResponse(content_type='application/pdf')

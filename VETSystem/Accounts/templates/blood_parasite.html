@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+<!Doctype html>
+<html>
+    <head>
+
+    </head>
+    <body>
+{% block content %}   
+<!-- login section start-->
+
+  <div class="login_section">
+    <div class="container">
+   <div class="row">
+     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+       <div class="card card-signin my-5">
+         <div class="card-body">
+           <h5 class="card-title text-center">Blood Parasites امراض الدم</h5>
+           <form class="form-signin" method="post">
+            {% csrf_token %}
+                          
+            <div class="form-group">
+                <div class="form-label-group">
+                    <small class="form-text text-muted">THELERIA ثيليريا</small>
+                    {{ form.THELERIA }}
+                </div>
+                    
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <small class="form-text text-muted">BABESIA  بابيسيا</small>
+                    {{ form.BABESIA }}
+                </div> 
+                        
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <small class="form-text text-muted"> ANAPLASMA أنابلازما</small>
+                    {{ form.ANAPLASMA }}
+                </div>
+
+                <div class="form-group">
+                <div class="form-label-group">
+                    <small class="form-text text-muted">TRYPANOSOMA تريبانسوما</small>
+                    {{ form.TRYPANOSOMA }}
+                 </div> 
+                </div>                   
+                 
+
+    
+          
+             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+             <hr class="my-4">
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+   </div>
+ </div>
+ <!-- login section end-->
+            
+
+{% endblock %}

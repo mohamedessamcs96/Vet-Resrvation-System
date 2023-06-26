@@ -1,5 +1,5 @@
 from django import forms
-from .models import Client,UserAdmin,Haematology,BloodChemistry
+from .models import Client,UserAdmin,Haematology,BloodChemistry,AnalysisPrices,Intestinalparasites,BloodParasaite
 
 from django.forms import formset_factory
 
@@ -11,12 +11,12 @@ class AdminForm(forms.ModelForm):
     class Meta:
         model = UserAdmin
         #fields='__all__'
-        fields =('fname','lname','username','birthdate','gender','is_admin','is_superuser','is_staff','password1','password2','is_technichal','is_advisor')
+        fields =('fname','lname','email','username','birthdate','gender','is_admin','is_superuser','is_staff','password1','password2','is_technichal','is_advisor')
 
         widgets={
                 'fname':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
                 'lname':forms.TextInput(attrs={'class':'form-control','style':'max-width: 20em',"id":"","placeholder":""}),
-                #'email':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":"email"}),
+                'email':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
                 'username':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
                 'birthdate':DateInput(attrs={'class':'form-control ','style':' max-width: 20em',"id":"","placeholder":"29/09/1996"}),
                 'password1':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
@@ -37,21 +37,20 @@ class AddClient(forms.ModelForm):
             fields = ('clientname','phonenumber','animaltype','sampletype','age','notes')
             
             widgets={
-                'clientname':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'phonenumber':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'animaltype':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'sampletype':forms.Select(attrs={'class':'form-control','style':'width:70%'}),
-                'age':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'notes':forms.TextInput(attrs={'class':'form-control','style':'width:70%'})
+                'clientname':forms.TextInput(attrs={'class':'form-control'}),
+                'phonenumber':forms.TextInput(attrs={'class':'form-control'}),
+                'animaltype':forms.TextInput(attrs={'class':'form-control'}),
+                'sampletype':forms.Select(attrs={'class':'form-control'}),
+                'age':forms.TextInput(attrs={'class':'form-control'}),
+                'notes':forms.TextInput(attrs={'class':'form-control'})
             }
               
 class SearchUserForm(forms.Form):
-     clientnumber=forms.IntegerField()
-     fields=('clientnumber')
-     widgets={
-        'clientnumber':forms.TextInput(attrs={'class':'form-control'})
+     #phonenumber=forms.CharField()
+     #fields=('phonenumber')
+    phonenumber=forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
             
-     }
+  
 
 
 
@@ -60,24 +59,56 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 
+
+class AnalysisPricesForm(forms.Form):
+    Haematology = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    BIOChemistry = forms.IntegerField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    Intestinalparasites= forms.IntegerField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    BloodParasaite= forms.IntegerField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    All= forms.IntegerField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+class IntestinalparasitesForm(forms.ModelForm):
+    class Meta:
+            model = Intestinalparasites
+            fields = ('COCCIDIA','NEMATODE','CESTODE')
+            widgets={
+                'COCCIDIA':forms.Select(attrs={'class':'form-control','style':''}),
+                'NEMATODE':forms.Select(attrs={'class':'form-control','style':''}),
+                'CESTODE':forms.Select(attrs={'class':'form-control','style':''}),
+            }
+
+class BloodParasaiteForm(forms.ModelForm):
+    class Meta:
+            model = BloodParasaite
+            fields = ('THELERIA','BABESIA','ANAPLASMA','TRYPANOSOMA')
+            widgets={
+                'THELERIA':forms.Select(attrs={'class':'form-control','style':''}),
+                'BABESIA':forms.Select(attrs={'class':'form-control','style':''}),
+                'ANAPLASMA':forms.Select(attrs={'class':'form-control','style':''}),
+                'TRYPANOSOMA':forms.Select(attrs={'class':'form-control','style':''}),
+            }
+
+
+
+
 class HaematologyForm(forms.ModelForm):
      class Meta:
           model=Haematology
           fields =('WBC','LYMPH','MONO','EOSIN','NEUT','RBC','HCT','MCV','MCH','HGB','MCHC','PLT')
 
           widgets={
-                'WBC':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'LYMPH':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'MONO':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'EOSIN':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'NEUT':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'RBC':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'HCT':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'MCV':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'MCH':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'MCHC':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'HGB':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'PLT':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
+                'WBC':forms.TextInput(attrs={'class':'form-control',}),
+                'LYMPH':forms.TextInput(attrs={'class':'form-control'}),
+                'MONO':forms.TextInput(attrs={'class':'form-control'}),
+                'EOSIN':forms.TextInput(attrs={'class':'form-control'}),
+                'NEUT':forms.TextInput(attrs={'class':'form-control'}),
+                'RBC':forms.TextInput(attrs={'class':'form-control'}),
+                'HCT':forms.TextInput(attrs={'class':'form-control'}),
+                'MCV':forms.TextInput(attrs={'class':'form-control'}),
+                'MCH':forms.TextInput(attrs={'class':'form-control'}),
+                'MCHC':forms.TextInput(attrs={'class':'form-control'}),
+                'HGB':forms.TextInput(attrs={'class':'form-control'}),
+                'PLT':forms.TextInput(attrs={'class':'form-control'}),
             }
           
           #fields='__all__'
@@ -88,18 +119,18 @@ class BloodChemistryForm(forms.ModelForm):
           fields =('TotalProtien','Urea','Gluco','Calcium','Ck','LDH','AST_GOT','ALT_GPT','Albumin','Phosphorous','Creatinine','IRON')
 
           widgets={
-                'TotalProtien':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'Urea':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'Gluco':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'Calcium':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'Ck':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'LDH':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'AST_GOT':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'ALT_GPT':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'Albumin':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'Phosphorous':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'Creatinine':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
-                'IRON':forms.TextInput(attrs={'class':'form-control','style':'width:70%'}),
+                'TotalProtien':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'Urea':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'Gluco':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'Calcium':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'Ck':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'LDH':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'AST_GOT':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'ALT_GPT':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'Albumin':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'Phosphorous':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'Creatinine':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'IRON':forms.TextInput(attrs={'class':'form-control','style':''}),
             }
 
 
