@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser,BaseUserManager
 from django.conf import settings
+from django.contrib.auth.hashers import make_password
+
 # Create your models here.
 
 GENDER_CHOICES=(
@@ -18,20 +20,24 @@ ANIMAL_SAMPLES=(
 )
 
 class AnalysisPrices(models.Model):
-    Haematology=models.IntegerField()
-    BIOChemistry=models.IntegerField()
-    Intestinalparasites=models.IntegerField()
-    BloodParasaite=models.IntegerField()
-    All=models.IntegerField()
+    Haematology = models.IntegerField(default=0)
+    BIOChemistry = models.IntegerField(default=0)
+    Intestinalparasites = models.IntegerField(default=0)
+    BloodParasite = models.IntegerField(default=0)
+    All = models.IntegerField(default=0)
 
-
+    def get_field_label(self, field_name):
+        for value, label in ANIMAL_SAMPLES:
+            if field_name == value:
+                return label
 
 # Create your models here.
 
 class UserAdmin(AbstractUser):
     fname=models.CharField(max_length=18,default='')
     lname=models.CharField(max_length=18,default='')
-    email=models.EmailField(unique=True,null=False)
+    email=models.EmailField()
+    #username=models.CharField(unique=True,max_length=10)
     gender=models.CharField(max_length=1,choices=GENDER_CHOICES)
     birthdate=models.DateField(null=True)
     is_staff=models.BooleanField(default=False)
@@ -41,12 +47,28 @@ class UserAdmin(AbstractUser):
     is_advisor=models.BooleanField(default=False)
     password1=models.CharField(max_length=20)
     password2=models.CharField(max_length=20)
-    REQUIRED_FIELDS = ['username']
-    USERNAME_FIELD = 'email'
+    #REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
 
     def __str__(self):
         return self.fname + ' '+self.lname
-    
+
+# class EmailBackend(ModelBackend):
+#     def authenticate(self, request, email=None, password=None, **kwargs):
+#         try:
+#             user = UserAdmin.objects.get(email=email)
+#         except UserAdmin.DoesNotExist:
+#             return None
+
+#         if user.check_password(password):
+#             return user
+
+#     def get_user(self, user_id):
+#         try:
+#             return UserAdmin.objects.get(pk=user_id)
+#         except UserAdmin.DoesNotExist:
+#             return None
+
 
 class Client(models.Model):
     admin=models.ForeignKey(UserAdmin,on_delete=models.CASCADE,null=True)
@@ -59,7 +81,11 @@ class Client(models.Model):
     #sampletype = models.ImageField(upload_to='images')
     notes=models.CharField(max_length=150)
     created=models.DateTimeField(auto_now_add=True)
- 
+    
+    def get_field_label(self, field_name):
+        for value, label in ANIMAL_SAMPLES:
+            if field_name == value:
+                return label
 
     def __str__(self):
         return str(self.clientnumber)

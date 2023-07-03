@@ -17,7 +17,7 @@
     <body>
 {% block content %}   
 <!-- login section start-->
-{% include 'partials/messages.html' %}
+
 
   <div class="login_section">
     <div class="container">
@@ -26,6 +26,7 @@
        <div class="card card-signin my-5">
          <div class="card-body">
            <h5 class="card-title text-center">Add  User اضف موظف</h5>
+           {% include 'partials/messages.html' %}
            <form class="form-signin" method="post">
             {% csrf_token %}
                           
@@ -48,22 +49,25 @@
                     {{register_form.lname}}    
                      <label for="inputEmail">Last Name الاسم الثاني</label>
                  </div> 
-                 <div class="form-group">
+         
                     <div class="form-label-group">
                     <small class="form-text text-muted">Select Gender نوع</small>
                     {{register_form.gender}}  
                     </div>
-                  </div>
-          
+               
+                
                 <div class="form-label-group">
                      {{register_form.password1}}    
 
                     <label for="inputEmail">Password الرقم سري </label>
                  </div> 
+           
+                 <div class="form-group">
                  <div class="form-label-group">
-                    {{register_form.password2}}    
-
-                   <label for="inputEmail">Password Again اعد الرقم السري</label>
+                    {{register_form.password2}}   
+                    <label for="inputEmail">Password Again اعد الرقم السري</label>
+ 
+                  </div>
                 </div>                     
                  <div class="form-group">
                     <div class="form-label-group">

@@ -1,33 +1,43 @@
 from django import forms
 from .models import Client,UserAdmin,Haematology,BloodChemistry,AnalysisPrices,Intestinalparasites,BloodParasaite
+from django.contrib.auth.forms import UserCreationForm
 
 from django.forms import formset_factory
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class AdminForm(forms.ModelForm):
-
+class AdminForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].widget.attrs.update({'class': 'form-control', 'style': 'max-width: 20em'})
+        self.fields['password2'].widget.attrs.update({'class': 'form-control', 'style': 'max-width: 20em'})
     class Meta:
         model = UserAdmin
         #fields='__all__'
-        fields =('fname','lname','email','username','birthdate','gender','is_admin','is_superuser','is_staff','password1','password2','is_technichal','is_advisor')
+        # password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control','style': 'width: 100%'}))
+        # password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control','style': 'width: 100%'}))        
+        fields =('fname','lname','username','email','birthdate','gender','is_admin','is_superuser','is_staff','password1','password2','is_technichal','is_advisor')
 
         widgets={
                 'fname':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
                 'lname':forms.TextInput(attrs={'class':'form-control','style':'max-width: 20em',"id":"","placeholder":""}),
                 'email':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
-                'username':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
+                'username':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"placeholder":""}),
                 'birthdate':DateInput(attrs={'class':'form-control ','style':' max-width: 20em',"id":"","placeholder":"29/09/1996"}),
-                'password1':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
-                'password2':forms.TextInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
+                #'password1':forms.PasswordInput(attrs={'class':'form-control ','style':'max-width: 20em',"placeholder":""}),
+                #'password2':forms.PasswordInput(attrs={'class':'form-control ','style':'max-width: 20em',"placeholder":""}),
                 'gender': forms.Select(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
                 'is_admin': forms.CheckboxInput(attrs={'class':'form-control ','style':' max-width: 20em',"id":"","placeholder":""}),
                 'is_superuser': forms.CheckboxInput(attrs={'class':'form-control ','style':' max-width: 20em',"id":"","placeholder":""}),
                 'is_staff': forms.CheckboxInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
                 'is_advisor': forms.CheckboxInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""}),
                 'is_technichal': forms.CheckboxInput(attrs={'class':'form-control ','style':'max-width: 20em',"id":"","placeholder":""})
-          }     
+          }  
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['password1'].widget.attrs['class'] = 'form-control'
+            self.fields['password2'].widget.attrs['class'] = 'form-control'   
         
      
 class AddClient(forms.ModelForm):
@@ -56,16 +66,16 @@ class SearchUserForm(forms.Form):
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control','name':'password'}))
 
 
 
 class AnalysisPricesForm(forms.Form):
     Haematology = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    BIOChemistry = forms.IntegerField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    Intestinalparasites= forms.IntegerField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    BloodParasaite= forms.IntegerField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    All= forms.IntegerField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    BIOChemistry = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    Intestinalparasites= forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    BloodParasite= forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    All= forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 class IntestinalparasitesForm(forms.ModelForm):
     class Meta:

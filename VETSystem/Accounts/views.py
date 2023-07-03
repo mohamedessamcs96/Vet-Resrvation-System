@@ -32,7 +32,7 @@ from django.http import HttpResponse
 
 from django import forms
 from .models import UserAdmin,Client,Report
-from .forms import AdminForm,AddClient,SearchUserForm,LoginForm,HaematologyForm,BloodChemistryForm
+from .forms import AdminForm,AddClient,AnalysisPricesForm,SearchUserForm,LoginForm,HaematologyForm,BloodChemistryForm
 
 
 
@@ -41,8 +41,8 @@ from .forms import AdminForm,AddClient,SearchUserForm,LoginForm,HaematologyForm,
 
 
 @login_required(login_url='/ar/login/')
-def form_created(request):
-    return render(request,'form_created.html')
+def admin_panel(request):
+    return render(request,'admin_panel.html')
 
 #Create an error message function
 def get_error_message(request):
@@ -64,15 +64,115 @@ def register_request(request):
     language_code = request.path.split('/')[1]  # Extract the first part of the path
     #template_name='register.html' if language_code=='en' else 'register-ar.html'
     template_name='register.html'
-    if request.user.is_superuser or request.user.is_staff:
+    if request.user.is_superuser or request.user.is_admin:
         if request.method=="POST":
             form=AdminForm(request.POST)
             if form.is_valid():
                 user=form.save()
-                login(request,user)
+                print(user)
+                print(request.POST)
+
+                #login(request,user)
+                """
+                [Print pdf]
+                """
+
+                """
+                End of printing pdf
+                """
                 print("register successful")
                 messages.success(request,"Register successful")
-                return redirect(f'/{language_code}/form_created/')
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = 'attachment; filename="EmplyeeReport.pdf"'
+                buffer = BytesIO()
+                # Set the desired margin size (in this example, 1 inch)
+                margin_size = 0.5 * inch
+                # Create the PDF object
+                doc = SimpleDocTemplate(buffer, pagesize=A4,leftMargin=margin_size, rightMargin=margin_size,
+                            topMargin=margin_size, bottomMargin=margin_size,showBoundary=True)
+                
+
+
+                    
+
+                # Load custom font file for Arabic text
+                font_path = settings.STATIC_ROOT + '/webfonts/22016-adobearabic.ttf'  # Replace with the path to your font file
+                print(font_path)
+                pdfmetrics.registerFont(TTFont('22016-adobearabic', font_path))
+
+            
+            
+                # Create a custom ParagraphStyle
+                custom_style = ParagraphStyle(
+                    name='CustomStyle',
+                    fontName='22016-adobearabic',  # Specify your custom font name
+                    fontSize=14,  # Specify the font size
+                    textColor=colors.black,  # Specify the font color
+                    spaceBefore=12,  # Specify the space before the paragraph
+                    spaceAfter=6,  # Specify the space after the paragraph
+                )
+                # Define a style for center-aligned paragraph
+                center_style = ParagraphStyle(
+                    name='CustomStyle',
+                    fontName='22016-adobearabic',  # Specify your custom font name
+                    fontSize=14,  # Specify the font size
+                    textColor=colors.blue,  # Specify the font color
+                    spaceBefore=12,  # Specify the space before the paragraph
+                    spaceAfter=6,  # Specify the space after the paragraph
+                    alignment=1
+                )
+
+                    
+
+
+                # Add simple strings above the table
+                #client=Client.objects.get(clientnumber=pk) 
+
+                # Add a spacer with horizontal space of 50 points
+                spacer = Spacer(50, 50)
+                
+                # Build the story containing the table
+                story = []    
+                # Define the path to your logo image file
+                #logo_path = settings.MEDIA_URL + 'img/logo.jpg'  # Replace with the actual path to your logo image file
+                logo_path = settings.STATIC_ROOT + '/img/logo.jpg'
+                # Create an Image object with the logo image
+
+
+
+                # Set the logo's position to the left side of the page
+
+                logo_image = Image(logo_path, width=2 * inch, height=1 * inch)  # Adjust the width and height as per your requirement
+                logo_image.hAlign = 'RIGHT'
+                # Add the logo image to the story before the table
+                story.append(logo_image)
+                username=request.POST['username']        
+                text_display = f' Username: {username}'
+                story.append(Paragraph(text_display,custom_style))
+                password=request.POST['password1']        
+                text_display = f' Password: {password}'
+                story.append(Paragraph(text_display,custom_style))
+                
+                story.append(spacer)
+                story.append(spacer)
+                story.append(spacer)
+                arabic_text_display=reshaper.reshape('مختبر صحه الكائنات البيطريه')
+                arabic_text_display = get_display(arabic_text_display)
+                story.append(Paragraph(arabic_text_display,center_style))
+                # Build the PDF document
+                doc.build(story)
+            
+
+
+
+                # Get the value of the BytesIO buffer and write it to the response
+                pdf = buffer.getvalue()
+                buffer.close()
+                response.write(pdf)
+                
+                return response
+
+                #return redirect(f'/{language_code}/form_created/')
             print("unsucessful")
             messages.error(request,get_error_message(request))
             return render(request=request,template_name=template_name,context={'register_form':form})
@@ -91,21 +191,28 @@ def logout_request(request):
 def login_request(request):
     if request.method=="POST":
         form=AuthenticationForm(request,data=request.POST)
+        print(request.POST)
+        print(form.is_bound)
+        print(form.errors)
         if form.is_valid():
-            username=form.cleaned_data.get('username')
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request,username=username, password=password)
+
+            #username=form.cleaned_data.get('username')
             password=form.cleaned_data.get('password')
-            user=authenticate(username=username,password=password)
+            print(username)
+            print(password)
+            #user=authenticate(username=username,password=password)
+            print(user)
             if user is not None:
-                login(request,user)
-                print('loggged')
-                messages.info(request,f"You are logged as {username}")
+                login(request, user)
+                messages.info(request, f"You are logged in as {username}")
                 return redirect('homepage')
             else:
-                print("Invalid username and password!")
-                messages.error(request,"invalid username and password")
+                messages.error(request, "Invalid username and password!")
         else:
-            print("not valid form")
-            messages.error(request,"not valid form")
+            messages.error(request, "Invalid form")
 
     form=LoginForm()
     return render(request=request,template_name='login.html',context={'login_form':form})
@@ -131,7 +238,7 @@ def add_client(request):
             print(request.POST)
             #img = request.FILES['image']
             
-            return redirect(f'/{language_code}/form_created/')
+            return redirect(f'/{language_code}/')
             #return render(request, 'add_user.html', {'form': form,'img_obj': img_obj})
         return render(request,template_name , {'form': form})
         
@@ -150,6 +257,37 @@ def home_page(request):
     language_code = request.path.split('/')[1]  # Extract the first part of the path
     template_name='home.html' if language_code=='en' else 'home-ar.html'
     return render(request,template_name)
+
+from .models import AnalysisPrices
+
+@login_required(login_url='/ar/login/')
+def add_price(request):
+    language_code = request.path.split('/')[1]  # Extract the first part of the path
+        # Retrieve the AnalysisPrices object
+    analysis_prices = AnalysisPrices.objects.get(pk=1)  # Assuming you have only one instance
+    
+    
+    # Create an instance of the form with initial values
+    form = AnalysisPricesForm(initial={
+        'Haematology': analysis_prices.Haematology,
+        'BIOChemistry': analysis_prices.BIOChemistry,
+        'Intestinalparasites': analysis_prices.Intestinalparasites,
+        'BloodParasite': analysis_prices.BloodParasite,
+        'All': analysis_prices.All
+    })
+    if request.method == 'POST':
+        # Update the values of AnalysisPrices object
+        analysis_prices.Haematology = request.POST['Haematology']
+        analysis_prices.BIOChemistry = request.POST['BIOChemistry']
+        analysis_prices.Intestinalparasites = request.POST['Intestinalparasites']
+        analysis_prices.BloodParasite = request.POST['BloodParasite']
+        analysis_prices.All = request.POST['All']
+        analysis_prices.save()
+        #return redirect(f'/{language_code}/')
+    
+    
+    #form=AnalysisPricesForm()
+    return render(request,'add_price.html',{'form':form})
 
 
 @login_required(login_url='/ar/login/')
@@ -850,7 +988,6 @@ def BloodChemistry(request,pk):
 
             # Get the current instance object to display in the template
             img_obj = form.instance
-            #return redirect(f'/{language_code}/form_created/')
             #return render(request, 'add_user.html', {'form': form,'img_obj': img_obj})
        
         print(form.errors.as_data())
@@ -874,7 +1011,7 @@ def create_report(request,pk):
     
 
 
-           
+
 
     # Load custom font file for Arabic text
     font_path = settings.STATIC_ROOT + '/webfonts/22016-adobearabic.ttf'  # Replace with the path to your font file
@@ -935,8 +1072,26 @@ def create_report(request,pk):
     arabic_text_display = get_display(reshaper.reshape(f' Animal Type: {client.animaltype}'))
     story.append(Paragraph(arabic_text_display,custom_style))
 
-    arabic_text_display = get_display(reshaper.reshape(f' Animal Sample Type: {client.sampletype}'))
+    clientrow = Client.objects.get(pk=1)
+
+    field_label = clientrow.get_field_label(client.sampletype)
+    print(field_label)
+    print(field_label)
+    print(field_label)
+    arabic_text_display = get_display(reshaper.reshape(f' Animal Sample Type: {field_label}'))
     story.append(Paragraph(arabic_text_display,custom_style))
+    
+    analysis_prices = AnalysisPrices.objects.get(pk=1)  # Assuming you have only one instance
+    field=str(field_label)
+    price = getattr(analysis_prices, field)
+
+
+    arabic_text_display = get_display(reshaper.reshape(f' Price: {price}'))
+    story.append(Paragraph(arabic_text_display,custom_style))
+    #print(analysis_prices)
+    #arabic_text_display = get_display(reshaper.reshape(f' Animal Sample Type: {client.sampletype}'))
+    #story.append(Paragraph(analysis_prices,custom_style))
+
 
     arabic_text_display = get_display(reshaper.reshape(f' Animal Age: {client.age}'))
     story.append(Paragraph(arabic_text_display,custom_style))
@@ -947,6 +1102,11 @@ def create_report(request,pk):
     story.append(spacer)
     story.append(spacer)
     story.append(spacer)
+    
+    import datetime
+    now=datetime.datetime.now()
+    story.append(Paragraph(f'{now.year}/{now.month}/{now.day}',center_style))
+    
     arabic_text_display=reshaper.reshape('مختبر صحه الكائنات البيطريه')
     arabic_text_display = get_display(arabic_text_display)
     story.append(Paragraph(arabic_text_display,center_style))
@@ -962,3 +1122,9 @@ def create_report(request,pk):
     response.write(pdf)
     
     return response
+
+
+
+
+
+    

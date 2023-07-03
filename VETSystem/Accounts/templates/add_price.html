@@ -1,0 +1,51 @@
+{% extends  'index.html'%}
+
+
+{% block content %} 
+
+
+
+<div class="login_section">
+    <div class="container">
+   <div class="row">
+     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+       <div class="card card-signin my-5">
+         <div class="card-body">
+           <h5 class="card-title text-center">Add Price</h5>
+           {% include 'partials/messages.html' %}
+           <form class="form-signin" method="post">
+            {% csrf_token %}
+            <div class="form-label-group">
+                 {{ form.Haematology }}
+                 <label for="inputEmail">Haematology</label>
+             </div>
+             <div class="form-label-group">
+                {{ form.BIOChemistry }}
+                <label for="inputEmail">BIOChemistry</label>
+            </div>
+            <div class="form-label-group">
+                {{ form.Intestinalparasites }}
+                <label for="inputEmail">Intestinalparasites</label>
+            </div>
+            <div class="form-label-group">
+                {{ form.BloodParasite }}
+                <label for="inputEmail">BloodParasite</label>
+            </div>
+            <div class="form-label-group">
+                {{ form.All }}
+                <label for="inputEmail">All</label>
+            </div>
+            <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Edit</button>
+             <hr class="my-4">
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+   </div>
+ </div> 
+
+
+
+{% endblock %}
