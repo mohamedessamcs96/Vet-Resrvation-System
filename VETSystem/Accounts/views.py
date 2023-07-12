@@ -624,7 +624,7 @@ def Blood_Parasite(request,pk):
             now=datetime.datetime.now()
             arabic_text_display5 = get_display(reshaper.reshape(f' التاريخ:{now.year}/{now.month}/{now.day}'))
             analysis_prices = AnalysisPrices.objects.get(pk=1)  # Assuming you have only one instance
-            field=str('BloodParasite')
+            field=str('BloodParasaite')
             print(field)
             price = getattr(analysis_prices, field)
 

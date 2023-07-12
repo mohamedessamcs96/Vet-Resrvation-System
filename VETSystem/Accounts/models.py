@@ -20,11 +20,11 @@ ANIMAL_SAMPLES=(
 )
 
 class AnalysisPrices(models.Model):
-    Haematology = models.IntegerField(default=0)
-    BIOChemistry = models.IntegerField(default=0)
-    Intestinalparasites = models.IntegerField(default=0)
-    BloodParasaite = models.IntegerField(default=0)
-    All = models.IntegerField(default=0)
+    Haematology = models.FloatField(default=0)
+    BIOChemistry = models.FloatField(default=0)
+    Intestinalparasites = models.FloatField(default=0)
+    BloodParasaite = models.FloatField(default=0)
+    All = models.FloatField(default=0)
 
     def get_field_label(self, field_name):
         for value, label in ANIMAL_SAMPLES:
