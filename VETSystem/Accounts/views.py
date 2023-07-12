@@ -381,7 +381,7 @@ def add_price(request):
         'Haematology': analysis_prices.Haematology,
         'BIOChemistry': analysis_prices.BIOChemistry,
         'Intestinalparasites': analysis_prices.Intestinalparasites,
-        'BloodParasite': analysis_prices.BloodParasite,
+        'BloodParasite': analysis_prices.BloodParasaite,
         'All': analysis_prices.All
     })
     if request.method == 'POST':
