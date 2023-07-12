@@ -1,59 +1,59 @@
-{% extends  'index.html'%}
+{% extends 'index.html' %}
 
-{% load static %}
-{% block content %}  
+
+
+
+<!Doctype html>
+<html>
+    <head></head>
+    <body>
+        {% block content %}   
 
   <div class="services_section_2 layout_padding">
     <div class="container">
-      <h1 class="companies_text">Client Name</h1>
-      <h1 class="companies_text">{{user.clientname}}</h1>
+      <h1 class="companies_text">Client Name اسم العميل</h1>
+      <h1 class="companies_text">{{client.clientname}}</h1>
 
       <div class="services_item ">
         <div class="row">
           <div class="col-sm-6 col-lg-6">
-            <h1 class="jobs_main">Create PDF report</h1>
-            <p class="many_main">There are many variations of passages of Lorem Ipsum available,</p>
+            <h1 class="jobs_main">Create report اطبع تقرير</h1>
             <div class="join_bt">
-              <div class="join_text"><a href="{% url 'createreport'  user.clientnumber %}">Print Report</a></div>
+              <div class="join_text"><a href="{% url 'createreport'  client.clientnumber %}">Print Report</a></div>
             </div>
           </div>
           <div class="col-sm-6 col-lg-6">
             <h1 class="jobs_main">Blood Chemistry</h1>
 
-            <p class="many_main">There are many variations of passages of Lorem Ipsum available,</p>
             <div class="join_bt">
-              <div class="join_text"><a href="{% url 'bloodchemistry'  user.clientnumber %}">Check up</a></div>
+              <div class="join_text"><a href="{% url 'bloodchemistry'  client.clientnumber %}">Check up</a></div>
             </div>
           </div>
        
           <div class="col-sm-6 col-lg-6">
             <h1 class="jobs_main">Haematology</h1>
-            <p class="many_main">There are many variations of passages of Lorem Ipsum available,</p>
             <div class="join_bt">
-              <div class="join_text"><a href="{% url 'haematology'  user.clientnumber %}">Check up</a></div>
+              <div class="join_text"><a href="{% url 'haematology'  client.clientnumber %}">Check up</a></div>
             </div>
           </div>
           <div class="col-sm-6 col-lg-6">
             <h1 class="jobs_main">Intestinal Parasites</h1>
-            <p class="many_main">There are many variations of passages of Lorem Ipsum available,</p>
             <div class="join_bt">
-              <div class="join_text"><a href="{% url 'intestinalparasites'  user.clientnumber %}">Check up</a></div>
+              <div class="join_text"><a href="{% url 'intestinalparasites'  client.clientnumber %}">Check up</a></div>
             </div>
           </div>
 
           <div class="col-sm-6 col-lg-6">
             <h1 class="jobs_main">Blood Parasite</h1>
-            <p class="many_main">There are many variations of passages of Lorem Ipsum available,</p>
             <div class="join_bt">
-              <div class="join_text"><a href="{% url 'bloodparasite'  user.clientnumber %}">Check up</a></div>
+              <div class="join_text"><a href="{% url 'bloodparasite'  client.clientnumber %}">Check up</a></div>
             </div>
           </div>
 
           <div class="col-sm-6 col-lg-6">
             <h1 class="jobs_main">ALL</h1>
-            <p class="many_main">There are many variations of passages of Lorem Ipsum available,</p>
             <div class="join_bt">
-              <div class="join_text"><a href="">Check up</a></div>
+              <div class="join_text"><a href="{% url 'checkall'  client.clientnumber %}">Check up</a></div>
             </div>
           </div>
         
@@ -62,4 +62,7 @@
     </div>
   </div>
 {% endblock %}
+</body>
+</html>
+
 

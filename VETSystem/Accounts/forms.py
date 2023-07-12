@@ -104,7 +104,7 @@ class BloodParasaiteForm(forms.ModelForm):
 class HaematologyForm(forms.ModelForm):
      class Meta:
           model=Haematology
-          fields =('WBC','LYMPH','MONO','EOSIN','NEUT','RBC','HCT','MCV','MCH','HGB','MCHC','PLT')
+          fields =('WBC','LYMPH','MONO','EOSIN','NEUT','RBC','HCT','MCV','MCH','HGB','MCHC','PLT','BAS')
 
           widgets={
                 'WBC':forms.TextInput(attrs={'class':'form-control',}),
@@ -119,6 +119,7 @@ class HaematologyForm(forms.ModelForm):
                 'MCHC':forms.TextInput(attrs={'class':'form-control'}),
                 'HGB':forms.TextInput(attrs={'class':'form-control'}),
                 'PLT':forms.TextInput(attrs={'class':'form-control'}),
+                'BAS':forms.TextInput(attrs={'class':'form-control'}),
             }
           
           #fields='__all__'
@@ -126,7 +127,7 @@ class HaematologyForm(forms.ModelForm):
 class BloodChemistryForm(forms.ModelForm):
      class Meta:
           model=BloodChemistry
-          fields =('TotalProtien','Urea','Gluco','Calcium','Ck','LDH','AST_GOT','ALT_GPT','Albumin','Phosphorous','Creatinine','IRON')
+          fields =('TotalProtien','Urea','Gluco','Calcium','Ck','LDH','AST_GOT','ALT_GPT','GGT','Phosphorous','Creatinine','IRON','Copper','APL')
 
           widgets={
                 'TotalProtien':forms.TextInput(attrs={'class':'form-control','style':''}),
@@ -137,27 +138,11 @@ class BloodChemistryForm(forms.ModelForm):
                 'LDH':forms.TextInput(attrs={'class':'form-control','style':''}),
                 'AST_GOT':forms.TextInput(attrs={'class':'form-control','style':''}),
                 'ALT_GPT':forms.TextInput(attrs={'class':'form-control','style':''}),
-                'Albumin':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'GGT':forms.TextInput(attrs={'class':'form-control','style':''}),
                 'Phosphorous':forms.TextInput(attrs={'class':'form-control','style':''}),
                 'Creatinine':forms.TextInput(attrs={'class':'form-control','style':''}),
                 'IRON':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'Copper':forms.TextInput(attrs={'class':'form-control','style':''}),
+                'APL':forms.TextInput(attrs={'class':'form-control','style':''}),
             }
 
-
-"""
-class DynamicFieldForm(forms.ModelForm):
-     class Meta:
-          model=DynamicField
-          fields='__all__'
-
-
-
-DynamicFieldFormSet=formset_factory(DynamicFieldForm,extra=1)
-
-
-class FormCreationForm(forms.ModelForm):
-     class Meta:
-          model=DynamicForm
-          #fields=['title']
-          fields='__all__'
-"""

@@ -23,7 +23,7 @@ class AnalysisPrices(models.Model):
     Haematology = models.IntegerField(default=0)
     BIOChemistry = models.IntegerField(default=0)
     Intestinalparasites = models.IntegerField(default=0)
-    BloodParasite = models.IntegerField(default=0)
+    BloodParasaite = models.IntegerField(default=0)
     All = models.IntegerField(default=0)
 
     def get_field_label(self, field_name):
@@ -120,6 +120,7 @@ class Haematology(models.Model):
     MCH=models.FloatField()
     MCHC=models.FloatField()
     PLT=models.FloatField()
+    BAS=models.FloatField()
 
 
 class BloodChemistry(models.Model):
@@ -134,7 +135,9 @@ class BloodChemistry(models.Model):
     LDH=models.FloatField()
     AST_GOT=models.FloatField()
     ALT_GPT= models.FloatField()
-    Albumin=models.FloatField()
+    GGT=models.FloatField()
+    APL=models.FloatField()
+    Copper=models.FloatField()
     Phosphorous=models.FloatField()
     Creatinine=models.FloatField()
     IRON=models.FloatField()

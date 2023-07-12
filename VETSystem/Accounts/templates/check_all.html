@@ -1,0 +1,242 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<!-- login section start-->
+<div class="login_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">ALL تحليل شايل</h5>
+            {% include 'partials/messages.html' %}
+            <form class="form-signin" method="post">
+              {% csrf_token %}
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form1.WBC }}
+                  <label for="inputEmail">WBC مناعة</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form1.LYMPH }}
+                  <label for="inputEmail">LYMPH خلايا ليمفاوية</label>
+                </div>
+
+
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form1.HCT }}
+                  <label for="inputEmail">HCT الدم</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form1.MCV }}
+                  <label for="inputEmail">MCV معدل حجم كريات الدم</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form1.MCHC }}
+                  <label for="inputEmail">MCHC متوسط تركيز الهيموجلوبين</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form1.PLT }}
+                  <label for="inputEmail">PLT الصفائح الدموية</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form1.MONO }}
+                  <label for="inputEmail">MONO خلايا وحيدة النواة</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form1.NEUT }}
+                  <label for="inputEmail">NEUT الخلايا المتعادلة</label>
+                </div>
+              </div>
+
+
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form1.PLT }}
+                  <label for="inputEmail">PLT الصفائح الدموية</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form1.EOSIN }}
+                  <label for="inputEmail">EOSIN الخلايا الحمضية</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                  {{ form1.RBC }}
+                  <label for="inputEmail">RBC كريات الدم الحمراء</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form1.HGB }}
+                    <label for="inputEmail">HGB هيموجلوبين</label>
+                  </div>
+              </div>
+              <div class="form-label-group row">
+
+                <div class="col-md-6">
+                  {{ form1.MCH }}
+                  <label for="inputEmail">MCH هيموجلوبين الكريه الوسط</label>
+                </div>
+
+                <div class="col-md-6">
+                  {{ form1.BAS }}
+                  <label for="inputEmail">BAS الخلايا القاعدية</label>
+                </div>
+              </div>
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form2.TotalProtien }}
+                  <label for="inputEmail"> Protien بروتين</label>
+                </div>
+
+                <div class="col-md-6">
+                   {{ form2.Ck }}
+                  <label for="inputEmail"> CK  قلب</label>
+                </div>
+
+
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form2.Calcium }}
+                  <label for="inputEmail">Calcium كالسيوم</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form2.Creatinine }}
+                    <label for="inputEmail">Creatinine الكلي</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form2.LDH }}                  
+                    <label for="inputEmail">LDH عضلات</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form2.Urea }}
+                  <label for="inputEmail">Urea اليوريا</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form2.AST_GOT }}
+                    <label for="inputEmail">AST_GOT  الكبد ١</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form2.ALT_GPT }}
+                  <label for="inputEmail">ALT_GPT الكبد ٢</label>
+                </div>
+              </div>
+
+
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form2.GGT }} 
+                    <label for="inputEmail">GGT الكبد٣</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{form2.Phosphorous }} 
+                    <label for="inputEmail">Phosphorous الفوسفور</label>
+                </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form2.IRON }}
+                    <label for="inputEmail">IRON حديد</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form2.Gluco }}                   
+                    <label for="inputEmail">Gluco جلوكوز</label>
+                  </div>
+              </div>
+
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form2.Copper }}
+                    <label for="inputEmail">Copper النحاس</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form2.APL }}                   
+                    <label for="inputEmail">ALP الالبومين</label>
+                  </div>
+              </div>
+              <div class="form-group">
+                <div class="form-label-group">
+                    <small class="form-text text-muted">THELERIA ثيليريا</small>
+                    {{ form3.THELERIA }}
+                </div>
+                    
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <small class="form-text text-muted">BABESIA  بابيسيا</small>
+                    {{ form3.BABESIA }}
+                </div> 
+                        
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <small class="form-text text-muted"> ANAPLASMA أنابلازما</small>
+                    {{ form3.ANAPLASMA }}
+                </div>
+
+                <div class="form-group">
+                <div class="form-label-group">
+                    <small class="form-text text-muted">TRYPANOSOMA تريبانسوما</small>
+                    {{ form3.TRYPANOSOMA }}
+                 </div> 
+                </div>   
+                <div class="form-group">
+                  <div class="form-label-group">
+                      <small class="form-text text-muted">NEMATODE  نيماتود</small>
+                      {{ form4.NEMATODE }}
+                  </div>
+                      
+                  <div class="form-group">
+                      <div class="form-label-group">
+                          <small class="form-text text-muted">COCCIDIA كوكيديا</small>
+                          {{ form4.COCCIDIA }}
+                      </div> 
+                          
+                  <div class="form-group">
+                      <div class="form-label-group">
+                          <small class="form-text text-muted"> CESTODE سيساتود</small>
+                          {{ form4.CESTODE }}
+                      </div>
+              <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Submit</button>
+              <hr class="my-4">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- login section end-->
+{% endblock %}

@@ -256,7 +256,7 @@ button {
 .banner_section {
     width: 100%;
     float: left;
-    background-image:url('{% static "images/horese-lease.jpeg" %}');
+    background-image: url(../images/horese-lease.jpeg);
     height: auto;
     padding-bottom: 90px;
     background-size: cover;
@@ -802,8 +802,8 @@ figure:hover+span {
 }
 
 .login_section {
-  background: #007bff;
-  background: linear-gradient(to right, #0062E6, #33AEFF);
+  background: #F7F1E5;
+  background: linear-gradient(to right, #F7F1E5, #F7F1E5);
 }
 
 .card-signin {
@@ -819,7 +819,7 @@ figure:hover+span {
 }
 
 .card-signin .card-body {
-  padding: 2rem;
+  padding: 3rem;
 }
 
 .form-signin {
@@ -1053,7 +1053,6 @@ input.btn_main_3::placeholder {
 }
 
 
-
 .circle-image {
      width: 150px;
      height: 150px;
@@ -1070,3 +1069,21 @@ input.btn_main_3::placeholder {
      
  
    }
+
+   .image-overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .image-overlay p {
+     color: #fff;
+     font-size: 24px;
+     text-align: center;
+ }

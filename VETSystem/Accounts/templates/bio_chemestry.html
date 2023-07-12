@@ -67,8 +67,8 @@
 
               <div class="form-label-group row">
                 <div class="col-md-6">
-                    {{ form.Albumin }} 
-                    <label for="inputEmail">Albumin البيومين</label>
+                    {{ form.GGT }} 
+                    <label for="inputEmail">GGT الكبد٣</label>
                 </div>
 
                 <div class="col-md-6">
@@ -89,7 +89,20 @@
                   </div>
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+              <div class="form-label-group row">
+                <div class="col-md-6">
+                    {{ form.Copper }}
+                    <label for="inputEmail">Copper النحاس</label>
+                </div>
+
+                <div class="col-md-6">
+                    {{ form.APL }}                   
+                    <label for="inputEmail">ALP الالبومين</label>
+                  </div>
+              </div>
+
+
+              <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Submit</button>
               <hr class="my-4">
             </form>
           </div>
