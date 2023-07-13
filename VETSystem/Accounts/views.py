@@ -2035,9 +2035,9 @@ def check_all(request,pk):
                 [Paragraph(get_display(reshaper.reshape('العضلات LDH')), custom_style2),Paragraph(LDH, custom_style2),Paragraph('185 - 550', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('كالسيوم CA')), custom_style2),Paragraph(Calcium, custom_style2),Paragraph('8.0 – 13.0', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('فسفور Phos')), custom_style2),Paragraph(Phosphorous, custom_style2),Paragraph(' 3.0 - 8.5', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('النحاس Copper')), custom_style2),Paragraph(Copper, custom_style2),Paragraph('40 – 50', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' حديد  	IRON')), custom_style2),Paragraph(IRON, custom_style2),Paragraph('150 - 500', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' جلوكوز  	Glucose')), custom_style2),Paragraph(Gluco, custom_style2),Paragraph('150 - 500', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('النحاس Copper')), custom_style2),Paragraph(Copper, custom_style2),Paragraph('55 – 110', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' حديد  	IRON')), custom_style2),Paragraph(IRON, custom_style2),Paragraph('70 - 160', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' جلوكوز  	Glucose')), custom_style2),Paragraph(Gluco, custom_style2),Paragraph('70 - 140', custom_style2)],
 
       
                 ]  
