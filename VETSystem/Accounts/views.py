@@ -1956,7 +1956,7 @@ def check_all(request,pk):
             center_style = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=10,  # Specify the font size
+                fontSize=9,  # Specify the font size
                 textColor=colors.blue,  # Specify the font color
                 #spaceBefore=12,  # Specify the space before the paragraph
                 #spaceAfter=6,  # Specify the space after the paragraph
@@ -2164,7 +2164,7 @@ def check_all(request,pk):
             client=Client.objects.get(clientnumber=pk) 
 
             # Add a spacer with horizontal space of 50 points
-            spacer = Spacer(10, 10)
+            spacer = Spacer(5, 5)
             
             # Build the story containing the table
             story = []    
@@ -2237,7 +2237,7 @@ def check_all(request,pk):
                     ])
             info_table_data.setStyle(info_table_data_style)
             # Set the row heights
-
+            story.append(spacer)
             # Add the table to the story
             story.append(info_table_data)
             # Add the table to the story
