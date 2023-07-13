@@ -2006,7 +2006,7 @@ def check_all(request,pk):
 
             # Define table style
             # Set custom column widths
-            column_widths = [3.5 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            column_widths = [1.7 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
             HaematologyTable = Table(HaematologyTable,colWidths=column_widths)
             HaematologyTable_style= TableStyle([
                         ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
@@ -2047,7 +2047,7 @@ def check_all(request,pk):
 
             # Define table style
             # Set custom column widths
-            column_widths = [3.5 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            column_widths = [1.7 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
             BloodChemistryTable = Table(BloodChemistryTable,colWidths=column_widths)
             BloodChemistryTable_style= TableStyle([
                         ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
@@ -2069,13 +2069,13 @@ def check_all(request,pk):
                 [Paragraph(get_display(reshaper.reshape('  الديدان الشريطية  CESTODE')), custom_style2),Paragraph(CESTODE, custom_style2)],
       
                 ]  
-            column_widths = [2 * inch, 0.6 * inch,2 * inch, 0.6 * inch]  # Adjust the widths as per your requirement
+            column_widths = [1.7 * inch, 0.5 * inch,1.7 * inch, 0.5 * inch]  # Adjust the widths as per your requirement
             TwoTableinone=[
                 [Paragraph('Intestinal parasites', custom_style2), Paragraph('Result', custom_style2),Paragraph('Blood Parasite', custom_style2), Paragraph('Result', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('الأكريات COCCIDIA')), custom_style2),Paragraph(COCCIDIA, custom_style2),Paragraph(get_display(reshaper.reshape('التَيْلَريَّات THELERIA')), custom_style2),Paragraph(THELERIA, custom_style2)],
                 [Paragraph(get_display(reshaper.reshape(' الدِّيدانُ المَمْسودَة NEMATODE')), custom_style2),Paragraph(NEMATODE, custom_style2),Paragraph(get_display(reshaper.reshape(' البابسيات BABESIA')), custom_style2),Paragraph(BABESIA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('  الديدان الشريطية  CESTODE')), custom_style2),Paragraph(CESTODE, custom_style2),Paragraph(get_display(reshaper.reshape('  داءُ الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' ')), custom_style2),Paragraph('', custom_style2),Paragraph(get_display(reshaper.reshape('  الطلائعيات الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('  الديدان الشريطية  CESTODE')), custom_style2),Paragraph(CESTODE, custom_style2),Paragraph(get_display(reshaper.reshape('   الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' ')), custom_style2),Paragraph('', custom_style2),Paragraph(get_display(reshaper.reshape('   الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2)],
                 ]  
             TwoTableinone = Table(TwoTableinone,colWidths=column_widths)
             TwoTableinone_style= TableStyle([
@@ -2114,8 +2114,8 @@ def check_all(request,pk):
                 [Paragraph('Blood Parasite', custom_style2), Paragraph('Result', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('التَيْلَريَّات THELERIA')), custom_style2),Paragraph(THELERIA, custom_style2)],
                 [Paragraph(get_display(reshaper.reshape(' البابسيات BABESIA')), custom_style2),Paragraph(BABESIA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('  داءُ الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('  الطلائعيات الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('   الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('   الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2)],
 
                 ]  
 
@@ -2244,9 +2244,9 @@ def check_all(request,pk):
 
             story.append(spacer)
     
-
-            story.append(BloodChemistryTable)  
             story.append(HaematologyTable)
+            story.append(BloodChemistryTable)  
+            
         
 
             #story.append(IntestinalparasitesTable)   
@@ -2257,8 +2257,7 @@ def check_all(request,pk):
 
             #story.append(Blood_ParasiteTable)              
  
-
-               
+            story.append(spacer)
             story.append(TwoTableinone)
 
 
