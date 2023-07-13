@@ -1935,7 +1935,7 @@ def check_all(request,pk):
             custom_style = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=14,  # Specify the font size
+                fontSize=12,  # Specify the font size
                 textColor=colors.black,  # Specify the font color
                 alignment=2,
          
@@ -1945,7 +1945,7 @@ def check_all(request,pk):
             custom_style2 = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=14,  # Specify the font size
+                fontSize=12,  # Specify the font size
                 textColor=colors.black,  # Specify the font color
     
                 alignment=1,
@@ -1956,10 +1956,10 @@ def check_all(request,pk):
             center_style = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=16,  # Specify the font size
+                fontSize=10,  # Specify the font size
                 textColor=colors.blue,  # Specify the font color
-                spaceBefore=12,  # Specify the space before the paragraph
-                spaceAfter=6,  # Specify the space after the paragraph
+                #spaceBefore=12,  # Specify the space before the paragraph
+                #spaceAfter=6,  # Specify the space after the paragraph
                 alignment=1
             )
 
@@ -1968,10 +1968,10 @@ def check_all(request,pk):
             head_style = ParagraphStyle(
                 name='head_style',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=20,  # Specify the font size
+                fontSize=16,  # Specify the font size
                 textColor=colors.black,  # Specify the font color
-                spaceBefore=12,  # Specify the space before the paragraph
-                spaceAfter=6,  # Specify the space after the paragraph
+                #spaceBefore=12,  # Specify the space before the paragraph
+                #spaceAfter=6,  # Specify the space after the paragraph
                 alignment=1
             )  
            
@@ -1986,7 +1986,7 @@ def check_all(request,pk):
 
 
             HaematologyTable=[
-                [Paragraph('Test', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
+                [Paragraph('Haematology', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('المناعه  	WBC')), custom_style2),Paragraph(WBC, custom_style2),Paragraph('8-16', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('الخلايا اللمفاوية            	Lymph')), custom_style2),Paragraph(LYMPH, custom_style2),Paragraph('13 – 45', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('خلايا وحيدات النواة  		Mono')), custom_style2),Paragraph(MONO, custom_style2),Paragraph('2.0 – 8.0', custom_style2)],
@@ -2006,24 +2006,24 @@ def check_all(request,pk):
 
             # Define table style
             # Set custom column widths
-            column_widths = [2 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            column_widths = [3.5 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
             HaematologyTable = Table(HaematologyTable,colWidths=column_widths)
             HaematologyTable_style= TableStyle([
                         ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
                         ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
                         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                         ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
-                        ('FONTSIZE', (0, 0), (-1, 0), 16),
+                        ('FONTSIZE', (0, 0), (-1, 0), 8),
                         ('BACKGROUND', (0, 1), (-1, -1), colors.white),
                         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), 4),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),  # Bottom padding for all cells
+                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
                     ])
             HaematologyTable.setStyle(HaematologyTable_style)
             # Set the row heights
 
             BloodChemistryTable=[
-                [Paragraph('Test', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
+                [Paragraph('Blood Chemistry', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('يوريا UREA')), custom_style2),Paragraph(Urea, custom_style2),Paragraph('28 - 8', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape(' الكلى Creatinine')), custom_style2),Paragraph(Creatinine, custom_style2),Paragraph('2.4 – 0.5', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('الكبد1 Ast')), custom_style2),Paragraph(AST_GOT, custom_style2),Paragraph('135 – 31', custom_style2)],
@@ -2047,52 +2047,71 @@ def check_all(request,pk):
 
             # Define table style
             # Set custom column widths
-            column_widths = [2 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            column_widths = [3.5 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
             BloodChemistryTable = Table(BloodChemistryTable,colWidths=column_widths)
             BloodChemistryTable_style= TableStyle([
                         ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
                         ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
                         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                         ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
-                        ('FONTSIZE', (0, 0), (-1, 0), 16),
+                        ('FONTSIZE', (0, 0), (-1, 0), 8),
                         ('BACKGROUND', (0, 1), (-1, -1), colors.white),
                         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), 4),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),  # Bottom padding for all cells
+                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
                     ])
             BloodChemistryTable.setStyle(BloodChemistryTable_style)
 
             IntestinalparasitesTable=[
-                [Paragraph('Test', custom_style2), Paragraph('Result', custom_style2)],
+                [Paragraph('Intestinal parasites', custom_style2), Paragraph('Result', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('الأكريات COCCIDIA')), custom_style2),Paragraph(COCCIDIA, custom_style2)],
                 [Paragraph(get_display(reshaper.reshape(' الدِّيدانُ المَمْسودَة NEMATODE')), custom_style2),Paragraph(NEMATODE, custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('  الديدان الشريطية  CESTODE')), custom_style2),Paragraph(CESTODE, custom_style2)],
       
                 ]  
-
-
+            column_widths = [2 * inch, 0.6 * inch,2 * inch, 0.6 * inch]  # Adjust the widths as per your requirement
+            TwoTableinone=[
+                [Paragraph('Intestinal parasites', custom_style2), Paragraph('Result', custom_style2),Paragraph('Blood Parasite', custom_style2), Paragraph('Result', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('الأكريات COCCIDIA')), custom_style2),Paragraph(COCCIDIA, custom_style2),Paragraph(get_display(reshaper.reshape('التَيْلَريَّات THELERIA')), custom_style2),Paragraph(THELERIA, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' الدِّيدانُ المَمْسودَة NEMATODE')), custom_style2),Paragraph(NEMATODE, custom_style2),Paragraph(get_display(reshaper.reshape(' البابسيات BABESIA')), custom_style2),Paragraph(BABESIA, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('  الديدان الشريطية  CESTODE')), custom_style2),Paragraph(CESTODE, custom_style2),Paragraph(get_display(reshaper.reshape('  داءُ الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' ')), custom_style2),Paragraph('', custom_style2),Paragraph(get_display(reshaper.reshape('  الطلائعيات الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2)],
+                ]  
+            TwoTableinone = Table(TwoTableinone,colWidths=column_widths)
+            TwoTableinone_style= TableStyle([
+                        ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
+                        ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
+                        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                        ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
+                        ('FONTSIZE', (0, 0), (-1, 0), 8),
+                        ('BACKGROUND', (0, 1), (-1, -1), colors.white),
+                        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
+                    ])
+            TwoTableinone.setStyle(TwoTableinone_style)
 
 
             # Define table style
             # Set custom column widths
-            column_widths = [2 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            column_widths = [4 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
             IntestinalparasitesTable = Table(IntestinalparasitesTable,colWidths=column_widths)
             IntestinalparasitesTable_style= TableStyle([
                         ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
                         ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
                         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                         ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
-                        ('FONTSIZE', (0, 0), (-1, 0), 16),
+                        ('FONTSIZE', (0, 0), (-1, 0), 8),
                         ('BACKGROUND', (0, 1), (-1, -1), colors.white),
                         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), 4),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),  # Bottom padding for all cells
+                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
                     ])
             IntestinalparasitesTable.setStyle(IntestinalparasitesTable_style)
             # Set the row heights
 
             Blood_ParasiteTable=[
-                [Paragraph('Test', custom_style2), Paragraph('Result', custom_style2)],
+                [Paragraph('Blood Parasite', custom_style2), Paragraph('Result', custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('التَيْلَريَّات THELERIA')), custom_style2),Paragraph(THELERIA, custom_style2)],
                 [Paragraph(get_display(reshaper.reshape(' البابسيات BABESIA')), custom_style2),Paragraph(BABESIA, custom_style2)],
                 [Paragraph(get_display(reshaper.reshape('  داءُ الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
@@ -2105,18 +2124,18 @@ def check_all(request,pk):
 
             # Define table style
             # Set custom column widths
-            column_widths = [2 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            column_widths = [4 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
             Blood_ParasiteTable = Table(Blood_ParasiteTable,colWidths=column_widths)
             Blood_ParasiteTable_style= TableStyle([
                         ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
                         ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
                         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                         ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
-                        ('FONTSIZE', (0, 0), (-1, 0), 16),
+                        ('FONTSIZE', (0, 0), (-1, 0), 8),
                         ('BACKGROUND', (0, 1), (-1, -1), colors.white),
                         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), 4),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),  # Bottom padding for all cells
+                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
                     ])
             Blood_ParasiteTable.setStyle(Blood_ParasiteTable_style)          
            
@@ -2126,7 +2145,7 @@ def check_all(request,pk):
             center_style = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=14,  # Specify the font size
+                fontSize=12,  # Specify the font size
                 textColor=colors.blue,  # Specify the font color
                 spaceBefore=12,  # Specify the space before the paragraph
                 spaceAfter=6,  # Specify the space after the paragraph
@@ -2156,7 +2175,7 @@ def check_all(request,pk):
 
 
             # Set the logo's position to the left side of the page
-
+            
             logo_image = Image(logo_path, width=2 * inch, height=1 * inch)  # Adjust the width and height as per your requirement
             logo_image.hAlign = 'RIGHT'
             # Add the logo image to the story before the table
@@ -2210,11 +2229,11 @@ def check_all(request,pk):
                         ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
                         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                         ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
-                        ('FONTSIZE', (0, 0), (-1, 0), 12),
+                        ('FONTSIZE', (0, 0), (-1, 0), 8),
                         ('BACKGROUND', (0, 1), (-1, -1), '#9DB2BF'),
                         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), 6),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),  # Bottom padding for all cells
+                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
                     ])
             info_table_data.setStyle(info_table_data_style)
             # Set the row heights
@@ -2223,36 +2242,25 @@ def check_all(request,pk):
             story.append(info_table_data)
             # Add the table to the story
 
-            story.append(Paragraph('Blood Chemistry',head_style))
             story.append(spacer)
+    
 
             story.append(BloodChemistryTable)  
+            story.append(HaematologyTable)
+        
 
-            story.append(Paragraph('Intestinal parasites',head_style))
-            story.append(spacer)
-
-            story.append(IntestinalparasitesTable)   
+            #story.append(IntestinalparasitesTable)   
 
     
-            story.append(spacer)
-            story.append(spacer)
-            story.append(spacer)
-            story.append(spacer)
 
-            story.append(Paragraph('Blood ParasiteTable',head_style))
-            story.append(spacer)
-            story.append(spacer)
-            story.append(spacer)
-            story.append(spacer)
-            story.append(spacer)
-            story.append(Blood_ParasiteTable)              
-            story.append(Paragraph('Hametology',head_style))
-            story.append(spacer)
 
-            story.append(HaematologyTable)   
-            story.append(spacer)
-            story.append(spacer)
-            story.append(spacer)
+
+            #story.append(Blood_ParasiteTable)              
+ 
+
+               
+            story.append(TwoTableinone)
+
 
 
    
@@ -2269,10 +2277,12 @@ def check_all(request,pk):
             # Create an Image object with the logo image
             # Set the logo's position to the left side of the page
             
-            story.append(spacer)  
+            #story.append(spacer)  
 
             logo_image = Image(logo_path, width=0.7 * inch, height=0.7 * inch)  # Adjust the width and height as per your requirement
             # Add the logo image to the story before the table
+            
+            story.append(spacer)
             story.append(logo_image)  
 
 
