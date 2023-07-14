@@ -1935,7 +1935,7 @@ def check_all(request,pk):
             custom_style = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=12,  # Specify the font size
+                fontSize=13,  # Specify the font size
                 textColor=colors.black,  # Specify the font color
                 alignment=2,
          
@@ -1945,7 +1945,7 @@ def check_all(request,pk):
             custom_style2 = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=12,  # Specify the font size
+                fontSize=13,  # Specify the font size
                 textColor=colors.black,  # Specify the font color
     
                 alignment=1,
@@ -1956,7 +1956,7 @@ def check_all(request,pk):
             center_style = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=9,  # Specify the font size
+                fontSize=14,  # Specify the font size
                 textColor=colors.blue,  # Specify the font color
                 #spaceBefore=12,  # Specify the space before the paragraph
                 #spaceAfter=6,  # Specify the space after the paragraph
@@ -1968,7 +1968,7 @@ def check_all(request,pk):
             head_style = ParagraphStyle(
                 name='head_style',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=16,  # Specify the font size
+                fontSize=18,  # Specify the font size
                 textColor=colors.black,  # Specify the font color
                 #spaceBefore=12,  # Specify the space before the paragraph
                 #spaceAfter=6,  # Specify the space after the paragraph
@@ -1985,71 +1985,67 @@ def check_all(request,pk):
 
 
 
-            HaematologyTable=[
-                [Paragraph('Haematology', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('المناعه  	WBC')), custom_style2),Paragraph(WBC, custom_style2),Paragraph('8-16', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الخلايا اللمفاوية            	Lymph')), custom_style2),Paragraph(LYMPH, custom_style2),Paragraph('13 – 45', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('خلايا وحيدات النواة  		Mono')), custom_style2),Paragraph(MONO, custom_style2),Paragraph('2.0 – 8.0', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الخلايا المتعادلة	Neut')), custom_style2),Paragraph(NEUT, custom_style2),Paragraph('30 – 70', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الخلايا الحمضية    	Eosin')), custom_style2),Paragraph(EOSIN, custom_style2),Paragraph('0.0 – 6.0', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الخلايا القاعدية    	Bas')), custom_style2),Paragraph(BAS, custom_style2),Paragraph('0.0 – 1.0', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('كريات الدم الحمراء   	RBC')), custom_style2),Paragraph(RBC, custom_style2),Paragraph('7 – 11', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('هيمو جلوين  	Hgb')), custom_style2),Paragraph(HGB, custom_style2),Paragraph('11 – 16', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('حجم الدم  	Hct')), custom_style2),Paragraph(HCT, custom_style2),Paragraph('25 – 33', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('معدل حجم كريات الدم  	Mcv ')), custom_style2),Paragraph(MCV, custom_style2),Paragraph('26 – 35', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('هيمو جلوبين الكرية الوسط  	Mch')), custom_style2),Paragraph(MCH, custom_style2),Paragraph('12 – 17', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('متوسط تركيز هيمو جلوبين  Mchc')), custom_style2),Paragraph(MCHC, custom_style2),Paragraph('40 – 50', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الصفائح الدموية  	PLT')), custom_style2),Paragraph(PLT, custom_style2),Paragraph('150 - 500', custom_style2)],
+            # HaematologyTable=[
+            #     [Paragraph('Haematology', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('المناعه  	WBC')), custom_style2),Paragraph(WBC, custom_style2),Paragraph('8-16', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الخلايا اللمفاوية            	Lymph')), custom_style2),Paragraph(LYMPH, custom_style2),Paragraph('13 – 45', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('خلايا وحيدات النواة  		Mono')), custom_style2),Paragraph(MONO, custom_style2),Paragraph('2.0 – 8.0', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الخلايا المتعادلة	Neut')), custom_style2),Paragraph(NEUT, custom_style2),Paragraph('30 – 70', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الخلايا الحمضية    	Eosin')), custom_style2),Paragraph(EOSIN, custom_style2),Paragraph('0.0 – 6.0', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الخلايا القاعدية    	Bas')), custom_style2),Paragraph(BAS, custom_style2),Paragraph('0.0 – 1.0', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('كريات الدم الحمراء   	RBC')), custom_style2),Paragraph(RBC, custom_style2),Paragraph('7 – 11', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('هيمو جلوين  	Hgb')), custom_style2),Paragraph(HGB, custom_style2),Paragraph('11 – 16', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('حجم الدم  	Hct')), custom_style2),Paragraph(HCT, custom_style2),Paragraph('25 – 33', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('معدل حجم كريات الدم  	Mcv ')), custom_style2),Paragraph(MCV, custom_style2),Paragraph('26 – 35', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('هيمو جلوبين الكرية الوسط  	Mch')), custom_style2),Paragraph(MCH, custom_style2),Paragraph('12 – 17', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('متوسط تركيز هيمو جلوبين  Mchc')), custom_style2),Paragraph(MCHC, custom_style2),Paragraph('40 – 50', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الصفائح الدموية  	PLT')), custom_style2),Paragraph(PLT, custom_style2),Paragraph('150 - 500', custom_style2)],
 
       
-                ]
+            #     ]
 
-            # Define table style
-            # Set custom column widths
-            column_widths = [1.7 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
-            HaematologyTable = Table(HaematologyTable,colWidths=column_widths)
-            HaematologyTable_style= TableStyle([
-                        ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
-                        ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
-                        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                        ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
-                        ('FONTSIZE', (0, 0), (-1, 0), 8),
-                        ('BACKGROUND', (0, 1), (-1, -1), colors.white),
-                        ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
-                    ])
-            HaematologyTable.setStyle(HaematologyTable_style)
-            # Set the row heights
+            # # Define table style
+            # # Set custom column widths
+            # column_widths = [1.7 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            # HaematologyTable = Table(HaematologyTable,colWidths=column_widths)
+            # HaematologyTable_style= TableStyle([
+            #             ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
+            #             ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
+            #             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            #             ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
+            #             ('FONTSIZE', (0, 0), (-1, 0), 8),
+            #             ('BACKGROUND', (0, 1), (-1, -1), colors.white),
+            #             ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            #             ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+            #             ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
+            #         ])
+            # HaematologyTable.setStyle(HaematologyTable_style)
+            # # Set the row heights
 
-            BloodChemistryTable=[
-                [Paragraph('Blood Chemistry', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('يوريا UREA')), custom_style2),Paragraph(Urea, custom_style2),Paragraph('28 - 8', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' الكلى Creatinine')), custom_style2),Paragraph(Creatinine, custom_style2),Paragraph('2.4 – 0.5', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الكبد1 Ast')), custom_style2),Paragraph(AST_GOT, custom_style2),Paragraph('135 – 31', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الكبد2 ALT')), custom_style2),Paragraph(ALT_GPT, custom_style2),Paragraph('25 – 3', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الكبد3 GGT ')), custom_style2),Paragraph(GGT, custom_style2),Paragraph('55 – 4.5', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('بروتين Protein')), custom_style2),Paragraph(TotalProtien, custom_style2),Paragraph('7.5 – 5.2', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الفوسفاتاز ALP')), custom_style2),Paragraph(ALP, custom_style2),Paragraph('98-279', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('قلب CK')), custom_style2),Paragraph(Ck, custom_style2),Paragraph('16 – 206', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('العضلات LDH')), custom_style2),Paragraph(LDH, custom_style2),Paragraph('185 - 550', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('كالسيوم CA')), custom_style2),Paragraph(Calcium, custom_style2),Paragraph('8.0 – 13.0', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('فسفور Phos')), custom_style2),Paragraph(Phosphorous, custom_style2),Paragraph(' 3.0 - 8.5', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('النحاس Copper')), custom_style2),Paragraph(Copper, custom_style2),Paragraph('55 – 110', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' حديد  	IRON')), custom_style2),Paragraph(IRON, custom_style2),Paragraph('70 - 160', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' جلوكوز  	Glucose')), custom_style2),Paragraph(Gluco, custom_style2),Paragraph('70 - 140', custom_style2)],
+            column_widths = [1.5 * inch, 0.7 * inch, 0.7 * inch,2 * inch, 0.7 * inch, 0.7 * inch]  # Adjust the widths as per your requirement
+            big2tableinone=[
+                [Paragraph('Blood Chemistry', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2),Paragraph('Haematology', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('يوريا UREA')), custom_style2),Paragraph(Urea, custom_style2),Paragraph('28 - 8', custom_style2),Paragraph(get_display(reshaper.reshape('المناعه  	WBC')), custom_style2),Paragraph(WBC, custom_style2),Paragraph('8-16', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' الكلى Creatinine')), custom_style2),Paragraph(Creatinine, custom_style2),Paragraph('2.4 – 0.5', custom_style2),Paragraph(get_display(reshaper.reshape('الخلايا اللمفاوية            	Lymph')), custom_style2),Paragraph(LYMPH, custom_style2),Paragraph('13 – 45', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('الكبد1 Ast')), custom_style2),Paragraph(AST_GOT, custom_style2),Paragraph('135 – 31', custom_style2),Paragraph(get_display(reshaper.reshape('خلايا وحيدات النواة  		Mono')), custom_style2),Paragraph(MONO, custom_style2),Paragraph('2.0 – 8.0', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('الكبد2 ALT')), custom_style2),Paragraph(ALT_GPT, custom_style2),Paragraph('25 – 3', custom_style2),Paragraph(get_display(reshaper.reshape('الخلايا المتعادلة	Neut')), custom_style2),Paragraph(NEUT, custom_style2),Paragraph('30 – 70', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('الكبد3 GGT ')), custom_style2),Paragraph(GGT, custom_style2),Paragraph('55 – 4.5', custom_style2),Paragraph(get_display(reshaper.reshape('الخلايا الحمضية    	Eosin')), custom_style2),Paragraph(EOSIN, custom_style2),Paragraph('0.0 – 6.0', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('بروتين Protein')), custom_style2),Paragraph(TotalProtien, custom_style2),Paragraph('7.5 – 5.2', custom_style2),Paragraph(get_display(reshaper.reshape('الخلايا القاعدية    	Bas')), custom_style2),Paragraph(BAS, custom_style2),Paragraph('0.0 – 1.0', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('الفوسفاتاز ALP')), custom_style2),Paragraph(ALP, custom_style2),Paragraph('98-279', custom_style2),Paragraph(get_display(reshaper.reshape('كريات الدم الحمراء   	RBC')), custom_style2),Paragraph(RBC, custom_style2),Paragraph('7 – 11', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('قلب CK')), custom_style2),Paragraph(Ck, custom_style2),Paragraph('16 – 206', custom_style2),Paragraph(get_display(reshaper.reshape('هيمو جلوين  	Hgb')), custom_style2),Paragraph(HGB, custom_style2),Paragraph('11 – 16', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('العضلات LDH')), custom_style2),Paragraph(LDH, custom_style2),Paragraph('185 - 550', custom_style2),Paragraph(get_display(reshaper.reshape('حجم الدم  	Hct')), custom_style2),Paragraph(HCT, custom_style2),Paragraph('25 – 33', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('كالسيوم CA')), custom_style2),Paragraph(Calcium, custom_style2),Paragraph('8.0 – 13.0', custom_style2),Paragraph(get_display(reshaper.reshape('معدل حجم كريات الدم  	Mcv ')), custom_style2),Paragraph(MCV, custom_style2),Paragraph('26 – 35', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('فسفور Phos')), custom_style2),Paragraph(Phosphorous, custom_style2),Paragraph(' 3.0 - 8.5', custom_style2),Paragraph(get_display(reshaper.reshape('هيمو جلوبين الكرية الوسط  	Mch')), custom_style2),Paragraph(MCH, custom_style2),Paragraph('12 – 17', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('النحاس Copper')), custom_style2),Paragraph(Copper, custom_style2),Paragraph('55 – 110', custom_style2),Paragraph(get_display(reshaper.reshape('متوسط تركيز هيمو جلوبين  Mchc')), custom_style2),Paragraph(MCHC, custom_style2),Paragraph('40 – 50', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' حديد  	IRON')), custom_style2),Paragraph(IRON, custom_style2),Paragraph('70 - 160', custom_style2),Paragraph(get_display(reshaper.reshape('الصفائح الدموية  	PLT')), custom_style2),Paragraph(PLT, custom_style2),Paragraph('150 - 500', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' جلوكوز  	Glucose')), custom_style2),Paragraph(Gluco, custom_style2),Paragraph('70 - 140', custom_style2),Paragraph(get_display(reshaper.reshape('')), custom_style2),Paragraph(' ', custom_style2),Paragraph('', custom_style2)],
 
       
                 ]  
 
+            big2tableinone = Table(big2tableinone,colWidths=column_widths)
 
-
-
-            # Define table style
-            # Set custom column widths
-            column_widths = [1.7 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
-            BloodChemistryTable = Table(BloodChemistryTable,colWidths=column_widths)
-            BloodChemistryTable_style= TableStyle([
+            big2tableinone_style= TableStyle([
                         ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
                         ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
                         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -2057,10 +2053,51 @@ def check_all(request,pk):
                         ('FONTSIZE', (0, 0), (-1, 0), 8),
                         ('BACKGROUND', (0, 1), (-1, -1), colors.white),
                         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
+                        ('TOPPADDING', (0, 0), (-1, -1), 3),  # Top padding for all cells
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 5),  # Bottom padding for all cells
                     ])
-            BloodChemistryTable.setStyle(BloodChemistryTable_style)
+            big2tableinone.setStyle(big2tableinone_style)
+
+
+            # BloodChemistryTable=[
+            #     [Paragraph('Blood Chemistry', custom_style2), Paragraph('Result', custom_style2),Paragraph('Normal', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('يوريا UREA')), custom_style2),Paragraph(Urea, custom_style2),Paragraph('28 - 8', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape(' الكلى Creatinine')), custom_style2),Paragraph(Creatinine, custom_style2),Paragraph('2.4 – 0.5', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الكبد1 Ast')), custom_style2),Paragraph(AST_GOT, custom_style2),Paragraph('135 – 31', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الكبد2 ALT')), custom_style2),Paragraph(ALT_GPT, custom_style2),Paragraph('25 – 3', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الكبد3 GGT ')), custom_style2),Paragraph(GGT, custom_style2),Paragraph('55 – 4.5', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('بروتين Protein')), custom_style2),Paragraph(TotalProtien, custom_style2),Paragraph('7.5 – 5.2', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('الفوسفاتاز ALP')), custom_style2),Paragraph(ALP, custom_style2),Paragraph('98-279', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('قلب CK')), custom_style2),Paragraph(Ck, custom_style2),Paragraph('16 – 206', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('العضلات LDH')), custom_style2),Paragraph(LDH, custom_style2),Paragraph('185 - 550', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('كالسيوم CA')), custom_style2),Paragraph(Calcium, custom_style2),Paragraph('8.0 – 13.0', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('فسفور Phos')), custom_style2),Paragraph(Phosphorous, custom_style2),Paragraph(' 3.0 - 8.5', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('النحاس Copper')), custom_style2),Paragraph(Copper, custom_style2),Paragraph('55 – 110', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape(' حديد  	IRON')), custom_style2),Paragraph(IRON, custom_style2),Paragraph('70 - 160', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape(' جلوكوز  	Glucose')), custom_style2),Paragraph(Gluco, custom_style2),Paragraph('70 - 140', custom_style2)],
+
+      
+            #     ]  
+
+
+
+
+            # # Define table style
+            # # Set custom column widths
+            # column_widths = [1.7 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            # BloodChemistryTable = Table(BloodChemistryTable,colWidths=column_widths)
+            # BloodChemistryTable_style= TableStyle([
+            #             ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
+            #             ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
+            #             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            #             ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
+            #             ('FONTSIZE', (0, 0), (-1, 0), 8),
+            #             ('BACKGROUND', (0, 1), (-1, -1), colors.white),
+            #             ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            #             ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+            #             ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
+            #         ])
+            # BloodChemistryTable.setStyle(BloodChemistryTable_style)
 
             IntestinalparasitesTable=[
                 [Paragraph('Intestinal parasites', custom_style2), Paragraph('Result', custom_style2)],
@@ -2069,13 +2106,13 @@ def check_all(request,pk):
                 [Paragraph(get_display(reshaper.reshape('  الديدان الشريطية  CESTODE')), custom_style2),Paragraph(CESTODE, custom_style2)],
       
                 ]  
-            column_widths = [1.7 * inch, 0.5 * inch,1.7 * inch, 0.5 * inch]  # Adjust the widths as per your requirement
+            column_widths = [1.7 * inch, 0.8 * inch,1.7 * inch, 0.8 * inch]  # Adjust the widths as per your requirement
             TwoTableinone=[
-                [Paragraph('Intestinal parasites', custom_style2), Paragraph('Result', custom_style2),Paragraph('Blood Parasite', custom_style2), Paragraph('Result', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('الأكريات COCCIDIA')), custom_style2),Paragraph(COCCIDIA, custom_style2),Paragraph(get_display(reshaper.reshape('التَيْلَريَّات THELERIA')), custom_style2),Paragraph(THELERIA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' الدِّيدانُ المَمْسودَة NEMATODE')), custom_style2),Paragraph(NEMATODE, custom_style2),Paragraph(get_display(reshaper.reshape(' البابسيات BABESIA')), custom_style2),Paragraph(BABESIA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('  الديدان الشريطية  CESTODE')), custom_style2),Paragraph(CESTODE, custom_style2),Paragraph(get_display(reshaper.reshape('   الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' ')), custom_style2),Paragraph('', custom_style2),Paragraph(get_display(reshaper.reshape('   الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2)],
+                [Paragraph('Blood Parasite', custom_style2), Paragraph('Result', custom_style2),Paragraph('Intestinal parasites', custom_style2), Paragraph('Result', custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('التَيْلَريَّات THELERIA')), custom_style2),Paragraph(THELERIA, custom_style2),Paragraph(get_display(reshaper.reshape('كوكسيدا COCCIDIA')), custom_style2),Paragraph(COCCIDIA, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape(' البابسيات BABESIA')), custom_style2),Paragraph(BABESIA, custom_style2),Paragraph(get_display(reshaper.reshape(' الاسطوانيه NEMATODE')), custom_style2),Paragraph(NEMATODE, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('   الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2),Paragraph(get_display(reshaper.reshape('   الشريطية  CESTODE')), custom_style2),Paragraph(CESTODE, custom_style2)],
+                [Paragraph(get_display(reshaper.reshape('   الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2),Paragraph(get_display(reshaper.reshape(' ')), custom_style2),Paragraph('', custom_style2)],
                 ]  
             TwoTableinone = Table(TwoTableinone,colWidths=column_widths)
             TwoTableinone_style= TableStyle([
@@ -2110,34 +2147,34 @@ def check_all(request,pk):
             IntestinalparasitesTable.setStyle(IntestinalparasitesTable_style)
             # Set the row heights
 
-            Blood_ParasiteTable=[
-                [Paragraph('Blood Parasite', custom_style2), Paragraph('Result', custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('التَيْلَريَّات THELERIA')), custom_style2),Paragraph(THELERIA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape(' البابسيات BABESIA')), custom_style2),Paragraph(BABESIA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('   الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
-                [Paragraph(get_display(reshaper.reshape('   الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2)],
+            # Blood_ParasiteTable=[
+            #     [Paragraph('Blood Parasite', custom_style2), Paragraph('Result', custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('التَيْلَريَّات THELERIA')), custom_style2),Paragraph(THELERIA, custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape(' البابسيات BABESIA')), custom_style2),Paragraph(BABESIA, custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('   الإيرليخِيَّات  ANAPLASMA')), custom_style2),Paragraph(ANAPLASMA, custom_style2)],
+            #     [Paragraph(get_display(reshaper.reshape('   الطفيلية   TRYPANOSOMA')), custom_style2),Paragraph(TRYPANOSOMA, custom_style2)],
 
-                ]  
-
-
+            #     ]  
 
 
-            # Define table style
-            # Set custom column widths
-            column_widths = [4 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
-            Blood_ParasiteTable = Table(Blood_ParasiteTable,colWidths=column_widths)
-            Blood_ParasiteTable_style= TableStyle([
-                        ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
-                        ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
-                        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                        ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
-                        ('FONTSIZE', (0, 0), (-1, 0), 8),
-                        ('BACKGROUND', (0, 1), (-1, -1), colors.white),
-                        ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
-                    ])
-            Blood_ParasiteTable.setStyle(Blood_ParasiteTable_style)          
+
+
+            # # Define table style
+            # # Set custom column widths
+            # column_widths = [4 * inch, 0.7 * inch, 1 * inch]  # Adjust the widths as per your requirement
+            # Blood_ParasiteTable = Table(Blood_ParasiteTable,colWidths=column_widths)
+            # Blood_ParasiteTable_style= TableStyle([
+            #             ('BACKGROUND', (0, 0), (-1, 0), '#9DB2BF'),
+            #             ('TEXTCOLOR', (0, 0), (-1, -1), colors.white) ,
+            #             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            #             ('FONTNAME', (0, 0), (-1, 0), '22016-adobearabic'),
+            #             ('FONTSIZE', (0, 0), (-1, 0), 8),
+            #             ('BACKGROUND', (0, 1), (-1, -1), colors.white),
+            #             ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            #             ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
+            #             ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
+            #         ])
+            # Blood_ParasiteTable.setStyle(Blood_ParasiteTable_style)          
            
            
            
@@ -2145,7 +2182,7 @@ def check_all(request,pk):
             center_style = ParagraphStyle(
                 name='CustomStyle',
                 fontName='22016-adobearabic',  # Specify your custom font name
-                fontSize=12,  # Specify the font size
+                fontSize=14,  # Specify the font size
                 textColor=colors.blue,  # Specify the font color
                 spaceBefore=12,  # Specify the space before the paragraph
                 spaceAfter=6,  # Specify the space after the paragraph
@@ -2164,7 +2201,7 @@ def check_all(request,pk):
             client=Client.objects.get(clientnumber=pk) 
 
             # Add a spacer with horizontal space of 50 points
-            spacer = Spacer(5, 5)
+            spacer = Spacer(10, 10)
             
             # Build the story containing the table
             story = []    
@@ -2187,6 +2224,7 @@ def check_all(request,pk):
             
 
             story.append(Paragraph("Veterinary animal Health Laboratory",head_style))
+            story.append(spacer)
             story.append(spacer)
             arabic_text_display=reshaper.reshape('  بيانات العميل ')
             arabic_text_display = get_display(arabic_text_display)
@@ -2232,27 +2270,29 @@ def check_all(request,pk):
                         ('FONTSIZE', (0, 0), (-1, 0), 8),
                         ('BACKGROUND', (0, 1), (-1, -1), '#9DB2BF'),
                         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                        ('TOPPADDING', (0, 0), (-1, -1), -2),  # Top padding for all cells
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),  # Bottom padding for all cells
+                        ('TOPPADDING', (0, 0), (-1, -1), 3),  # Top padding for all cells
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 5),  # Bottom padding for all cells
                     ])
             info_table_data.setStyle(info_table_data_style)
             # Set the row heights
             story.append(spacer)
+            
             # Add the table to the story
             story.append(info_table_data)
             # Add the table to the story
 
             story.append(spacer)
     
-            story.append(HaematologyTable)
-            story.append(BloodChemistryTable)  
+            #story.append(HaematologyTable)
+            #story.append(BloodChemistryTable)  
             
         
 
             #story.append(IntestinalparasitesTable)   
 
     
-
+            story.append(spacer)
+            story.append(big2tableinone)
 
 
             #story.append(Blood_ParasiteTable)              
