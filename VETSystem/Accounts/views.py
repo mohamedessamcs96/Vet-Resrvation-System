@@ -328,21 +328,32 @@ def logout_request(request):
 @login_required(login_url='/ar/login/')
 def add_client(request):
     language_code = request.path.split('/')[1]  # Extract the first part of the path
-    template_name='add_user.html' if language_code=='en' else 'add_user-ar.html'
+    template_name='add_user.html' if language_code=='en' else 'add_user.html'
     """Process images uploaded by users"""
     if request.method == 'POST':
         form = AddClient(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            
             # Get the current instance object to display in the template
-            img_obj = form.instance
             print(request.POST)
             phonenumber=request.POST['phonenumber']
-            
-           
-            client=Client.objects.get(phonenumber=phonenumber)
+            try:
+                client=Client.objects.get(phonenumber=phonenumber)
+            except:
+                client=None
 
-            return redirect('getchecked', pk=client.clientnumber)
+            if client is None:
+                form.save()
+                messages.success(request,"Client added successfuly")
+                client=Client.objects.get(phonenumber=phonenumber)
+                return redirect('getchecked', pk=client.clientnumber)
+            else:
+                messages.error(request,"phone number should be unique")
+                return render(request,template_name , {'form': form})
+           
+
+            
+        
         return render(request,template_name , {'form': form})
         
     else:

@@ -25,6 +25,7 @@
        <div class="card card-signin my-5">
          <div class="card-body">
            <h5 class="card-title text-center">Add Client اضف عميل</h5>
+           {% include 'partials/messages.html' %}
            <form class="form-signin" method="post">
             {% csrf_token %}
                           
@@ -47,17 +48,17 @@
                    {{form.age}}
                     <label for="inputEmail">Animal Age</label>
                  </div>                    
-                 <div class="form-group">
-                    <div class="form-label-group">
-                    <small class="form-text text-muted">Select a sample type</small>
-                      {{ form.sampletype }}
-
-                    </div>
-                  </div>
                  <div class="form-label-group">
                     {{form.notes}}
                     <label for="inputEmail">Notes</label>
-                 </div>      
+                 </div>     
+                 <div class="form-group">
+                  <div class="form-label-group">
+                  <small class="form-text text-muted">Select a sample type</small>
+                    {{ form.sampletype }}
+
+                  </div>
+                </div> 
           
              <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Add User</button>
              <hr class="my-4">
